@@ -1,0 +1,75 @@
+@model Wedblob.Web.Models.ContentFragment
+
+<section id="@Model.Data.navigationId" class="feed">
+    <h2 class="section-header">
+        @Model.Data.navigationTitle
+    </h2>
+
+    <div class="container">
+        <p class="text-center">
+            Pictures are from instagram. To add your own photo upload to instagram with the tag <span>#@(Model.Data.instagramTag)</span>
+        </p>
+        <div id="freewall"></div>
+        <button class="load-more-images btn btn-primary col-xs-12 col-md-8 col-md-offset-2">Show me more images</button>
+    </div>
+
+
+
+    @using (var context = Html.BeginScriptContext())
+    {
+        context.AddScriptFile("~/Content/lib/freewall/1.0.5/freewall.js");
+        context.AddScriptBlock(
+            @<script type="application/javascript">
+        var instagramUrl = "https://api.instagram.com/v1/tags/@(Model.Data.instagramTag)/media/recent?client_id=@(Model.Data.instagramClientId)&callback=?";
+
+        var wall = new freewall('#freewall');
+        wall.reset({
+            selector: 'li',
+            animate: false,
+            cellW: 150,
+            cellH: 150,
+            onResize: function() {
+                wall.fitWidth();
+            }
+        });
+
+        var appendInstagramImages = function(response){
+            var itemsToAppend = [];
+            $.each( response.data, function(i, item) {
+                var imageTypes = ['thumbnail','low_resolution','standard_resolution'];
+                var rand =Math.floor(Math.random()*2);
+                var imageType = imageTypes[rand]
+                var image = item.images[imageType];
+                itemsToAppend.push('<li class="'+imageType+'"><a href="'+item.link+'" target="_blank"><img src="'+image.url+'" width="100%"/></a></li>')
+
+            });
+            wall.fitWidth();
+            wall.appendBlock(itemsToAppend.join(''));
+
+
+            var nextUrl = response.pagination.next_url;
+            var $nextbutton = $('.load-more-images');
+            $nextbutton.prop('disabled',false);
+            if(nextUrl)
+                $nextbutton.data('next-url', nextUrl);
+            else
+                $nextbutton.hide();
+        }
+
+
+
+        $('.load-more-images').click(function() {
+            var nextUrl = $(this).data('next-url');
+            if (nextUrl) {
+                nextUrl = nextUrl.replace(/callback=.*?&/, 'callback=?&');
+                $(this).prop('disabled',true);
+                $.getJSON(nextUrl, appendInstagramImages);
+            }
+       })
+
+        $.getJSON( instagramUrl, appendInstagramImages);
+
+</script>);
+     }
+
+</section>

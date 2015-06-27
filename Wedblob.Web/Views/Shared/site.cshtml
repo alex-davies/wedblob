@@ -1,0 +1,162 @@
+﻿@model Wedblob.Web.Models.ContentFragment
+<!DOCTYPE html>
+    <html>
+		<head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>@Model.Data.title</title>
+
+            <!--[if lt IE 9]>
+            <link rel="stylesheet" href="/lib/bootstrap/3.3.4/css/bootstrap.min.css">
+            <link rel="stylesheet" href="/css/site.less">
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="/lib/respond/1.4.2/respond.min.js"></script>
+            <![endif]-->
+            <!--[if gte IE 9]>-->
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+            <link rel="stylesheet" href="Content/less/site.less">
+            <!--<![endif]-->
+
+            <script src="//use.typekit.net/izy1gnw.js"></script>
+            <script>try{Typekit.load();}catch(e){}</script>
+
+
+		</head>
+		<body>
+        <section id="heroBox">
+            <h1><div class="intro">@Model.Data.intro</div><div class="date">@Model.Data.date</div></h1>
+        </section>
+
+
+        <nav>
+            <div class="container">
+                <ul>
+                    @foreach (var content in Model.Data.content)
+                    {
+                        if (!string.IsNullOrWhiteSpace(content.navigationId == null ? null : content.navigationId.ToString()))
+                        {
+                            <li><a href="#@content.navigationId">@content.navigationTitle</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </nav>
+
+
+        @foreach (var content in Model.Data.content)
+        {
+            Wedblob.Web.Models.ContentFragment frag = Model.SubFragment(content);
+            Html.RenderPartial(frag.DataType, frag);
+        }
+
+       
+
+
+        <!--<section class="day-plan">-->
+
+            <!--<h2 class="section-header">On the day</h2>-->
+
+
+            <!--<div class="container">-->
+
+
+
+                <!--<ul class="timeline">-->
+                    <!--<li>-->
+                        <!--<div class="timeline-panel">-->
+                            <!--<div class="timeline-copy">-->
+                                <!--<h5 class="timeline-title">-->
+                                    <!--Responsive CSS Timeline-->
+                                <!--</h5>-->
+                                <!--<p>The timeline item description.</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="timeline-badge">-->
+                            <!--<i class="glyphicon glyphicon-envelope"></i>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="timeline-right">-->
+                        <!--<div class="timeline-panel">-->
+                            <!--<div class="timeline-copy">-->
+                                <!--<h5 class="timeline-title">-->
+                                    <!--Responsive CSS Timeline-->
+                                <!--</h5>-->
+                                <!--<p>The timeline item description.</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="timeline-badge info">-->
+                            <!--<i class="glyphicon glyphicon-search"></i>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</section>-->
+
+
+
+
+        @*@html.block('footer', function(model){
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        })*@
+
+            @using (var context = Html.BeginScriptContext())
+            {
+                context.AddScriptFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js");
+                context.AddScriptFile("//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js");
+                @*context.AddScriptBlock(
+                @<script type="application/javascript">
+                    $(function(){
+                        // Check the initial Poistion of the Sticky Header
+                        var $nav = $('nav');
+                        var navOffset = $nav.offset().top;
+                        var navIds = [];
+                        $nav.find('a').each(function(i,anchor){
+                            var $anchor = $(anchor);
+                            var href = $anchor.attr('href');
+                            if(href && href.indexOf('#') == 0)
+                                navIds.push(href.substring(1))
+                        });
+
+                        $(window).scroll(function(){
+                            $nav.toggleClass('navbar-fixed-top', $(window).scrollTop() > navOffset);
+                        });
+
+                        $(window).scroll(function(){
+                            var windowStart = $(window).scrollTop(); // get the offset of the window from the top of page
+                            var windowEnd = windowStart + $(window).height();
+
+                            var maxVisibleHeight = null;
+                            var maxVisibleHeightId = null;
+
+                            for (var i=0; i < navIds.length; i++) {
+                                var theID = navIds[i];
+                                var $section = $('#'+theID);
+                                var sectionStart = $section.offset().top;
+                                var sectionEnd = sectionStart + $section.height();
+
+                                var visibleHeight = Math.min(windowEnd, sectionEnd) - Math.max(windowStart, sectionStart)
+                                if(visibleHeight > 0 && visibleHeight > maxVisibleHeight){
+                                    maxVisibleHeight = visibleHeight;
+                                    maxVisibleHeightId = theID;
+                                }
+                            }
+
+                            for (var i=0; i < navIds.length; i++) {
+                                var theID = navIds[i];
+                                var $navItem =  $nav.find("a[href='#" + theID + "']").closest('li');
+                                $navItem.toggleClass('active', theID == maxVisibleHeightId);
+                            }
+
+                        });
+                    });
+                </script>);*@
+            }
+
+            
+
+            @Html.RenderScripts();
+
+		</body>
+	</html>

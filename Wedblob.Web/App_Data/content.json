@@ -1,0 +1,71 @@
+{
+    "type": "site",
+    "title": "Nilanthi & Alexander",
+    "intro": "We are tying the knot!",
+    "date": "10.04.2016",
+	"content":[
+		{
+			"type":"bride-and-groom",
+            "navigationTitle":"our story",
+            "navigationId":"bride-and-groom",
+            "bride" : {
+              "firstName":"Nilanthi",
+              "lastName":"Seneviratne",
+              "portrait":"http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
+              "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit. Nullam dignissim ultricies elit tempus lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est."
+            },
+            "groom" : {
+              "firstName":"Alexander",
+              "lastName":"Davies",
+              "portrait":"http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
+              "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit. Nullam dignissim ultricies elit tempus lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est."
+            }
+
+
+        },
+        {
+          "type":"people",
+          "navigationTitle":"bridal party",
+          "navigationId":"people",
+          "people":[
+            {
+              "firstName":"Anuradha",
+              "lastName":"Seneviratne",
+              "position":"Maid of honour",
+              "portrait":"http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
+              "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit."
+            },
+            {
+              "firstName":"Varun",
+              "lastName":"Prasad",
+              "position":"Best man",
+              "portrait":"http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
+              "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit."
+            },
+            {
+              "firstName":"Ramya",
+              "lastName":"Prasad",
+              "position":"Brides maid",
+              "portrait":"http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
+              "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit."
+            },
+            {
+              "firstName":"?????",
+              "lastName":"",
+              "position":"Man of mystery",
+              "portrait":"http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
+              "biography":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit."
+            }
+          ]
+        },
+        {
+          "type":"feed",
+          "navigationTitle":"#alexandniluwed",
+          "navigationId":"feed",
+          "instagramClientId" : "58c055cb1d31450c91a9fc377cd7a2e2",
+          "instagramTag":"alexandniluwed"
+
+
+        }
+	]
+}

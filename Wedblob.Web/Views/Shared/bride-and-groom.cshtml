@@ -1,0 +1,62 @@
+@model Wedblob.Web.Models.ContentFragment
+<section id="@Model.Data.navigationId" class="bride-and-groom">
+    <h2 class="container">
+        <div class="row ">
+            <div class="col-sm-6 left-side">
+                <div class="row">
+                    <div class="col-lg-6 col-md-5 col-xs-6">
+                        <div class="portrait">
+                            <img class="portrait" src="@Model.Data.bride.portrait"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-xs-6">
+                        <div class="name">
+                            <span class="first-name">@Model.Data.bride.firstName</span>
+                            <span class="last-name">@Model.Data.bride.lastName</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    <span class="and-divider">
+                        &amp;
+                    </span>
+
+            <div class="col-sm-6 right-side">
+                <div class="row">
+                    <div class="col-lg-6 col-md-7 col-xs-6">
+                        <div class="name">
+                            <span class="first-name">@Model.Data.groom.firstName</span>
+                            <span class="last-name">@Model.Data.groom.lastName</span>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-5 col-xs-6">
+                        <div class="portrait">
+                            <img class="portrait" src="@Model.Data.groom.portrait"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </h2>
+
+    <div class="container biography">
+        <div class="col-sm-6 left-side">
+            <p>@Model.Data.bride.biography</p>
+        </div>
+
+        <div class="line-divider">
+            <div class="hearts-divider">
+                <span class="icon"/>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-6 right-side">
+            <p>@Model.Data.groom.biography</p>
+        </div>
+    </div>
+</section>

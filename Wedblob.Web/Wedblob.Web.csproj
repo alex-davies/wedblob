@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1C6CE4B4-883C-40F7-8F30-B2046B4B02DD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wedblob.Web</RootNamespace>
+    <AssemblyName>Wedblob.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.3\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.4.4\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Forloop.HtmlHelpers">
+      <HintPath>..\packages\Forloop.HtmlHelpers.1.2.0.0\lib\net45\Forloop.HtmlHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Extensions\HtmlExtensions.cs" />
+    <Compile Include="Infrastructure\Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Infrastructure\Startup\FilterConfig.cs" />
+    <Compile Include="Infrastructure\Startup\IStartupTask.cs" />
+    <Compile Include="Infrastructure\Startup\RouteConfig.cs" />
+    <Compile Include="Infrastructure\Startup\AutoFacConfig.cs" />
+    <Compile Include="Models\ContentFragment.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ContentService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\butterscotch-webfont.svg" />
+    <Content Include="Content\fonts\butterscotchcatchwords-webfont.svg" />
+    <Content Include="Content\fonts\butterscotchornaments-webfont.svg" />
+    <Content Include="Content\fonts\butterscotchtt-webfont.svg" />
+    <Content Include="Content\fonts\butterscotch_alt_a_to_o-webfont.svg" />
+    <Content Include="Content\fonts\butterscotch_alt_p_to_z-webfont.svg" />
+    <Content Include="Content\fonts\butterscoth_alt_capitals-webfont.svg" />
+    <Content Include="Content\images\confectionary.png" />
+    <Content Include="Content\images\halftone.png" />
+    <Content Include="Content\images\hearts.png" />
+    <Content Include="Content\images\hero.jpg" />
+    <Content Include="Content\images\light_grey.png" />
+    <Content Include="Content\images\seamless_paper_texture.png" />
+    <Content Include="Content\images\sos.png" />
+    <Content Include="Content\images\symphony-red-strip.png" />
+    <Content Include="Content\images\symphony.png" />
+    <Content Include="Content\lib\bootstrap\3.3.2\css\bootstrap-theme.css" />
+    <Content Include="Content\lib\bootstrap\3.3.2\css\bootstrap-theme.min.css" />
+    <Content Include="Content\lib\bootstrap\3.3.2\css\bootstrap.css" />
+    <Content Include="Content\lib\bootstrap\3.3.2\css\bootstrap.min.css" />
+    <Content Include="Content\lib\bootstrap\3.3.2\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\lib\bootstrap\3.3.2\js\bootstrap.js" />
+    <Content Include="Content\lib\bootstrap\3.3.2\js\bootstrap.min.js" />
+    <Content Include="Content\lib\bootstrap\3.3.2\js\npm.js" />
+    <Content Include="Content\lib\bootstrap\3.3.4\css\bootstrap-theme.css" />
+    <Content Include="Content\lib\bootstrap\3.3.4\css\bootstrap-theme.min.css" />
+    <Content Include="Content\lib\bootstrap\3.3.4\css\bootstrap.css" />
+    <Content Include="Content\lib\bootstrap\3.3.4\css\bootstrap.min.css" />
+    <Content Include="Content\lib\bootstrap\3.3.4\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\lib\bootstrap\3.3.4\js\bootstrap.js" />
+    <Content Include="Content\lib\bootstrap\3.3.4\js\bootstrap.min.js" />
+    <Content Include="Content\lib\bootstrap\3.3.4\js\npm.js" />
+    <Content Include="Content\lib\freewall\1.0.5\freewall.js" />
+    <Content Include="Content\lib\respond\1.4.2\respond.matchmedia.addListener.min.js" />
+    <Content Include="Content\lib\respond\1.4.2\respond.matchmedia.addListener.src.js" />
+    <Content Include="Content\lib\respond\1.4.2\respond.min.js" />
+    <Content Include="Content\lib\respond\1.4.2\respond.src.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\content.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\site.less" />
+    <Content Include="Content\fonts\butterscotch-webfont.eot" />
+    <Content Include="Content\fonts\butterscotch-webfont.ttf" />
+    <Content Include="Content\fonts\butterscotch-webfont.woff" />
+    <Content Include="Content\fonts\butterscotch-webfont.woff2" />
+    <Content Include="Content\fonts\ButterScotch.otf" />
+    <Content Include="Content\fonts\butterscotchcatchwords-webfont.eot" />
+    <Content Include="Content\fonts\butterscotchcatchwords-webfont.ttf" />
+    <Content Include="Content\fonts\butterscotchcatchwords-webfont.woff" />
+    <Content Include="Content\fonts\butterscotchcatchwords-webfont.woff2" />
+    <Content Include="Content\fonts\ButterscotchCatchwords.ttf" />
+    <Content Include="Content\fonts\butterscotchornaments-webfont.eot" />
+    <Content Include="Content\fonts\butterscotchornaments-webfont.ttf" />
+    <Content Include="Content\fonts\butterscotchornaments-webfont.woff" />
+    <Content Include="Content\fonts\butterscotchornaments-webfont.woff2" />
+    <Content Include="Content\fonts\ButterscotchOrnaments.ttf" />
+    <Content Include="Content\fonts\butterscotchtt-webfont.eot" />
+    <Content Include="Content\fonts\butterscotchtt-webfont.ttf" />
+    <Content Include="Content\fonts\butterscotchtt-webfont.woff" />
+    <Content Include="Content\fonts\butterscotchtt-webfont.woff2" />
+    <Content Include="Content\fonts\ButterScotchTT.ttf" />
+    <Content Include="Content\fonts\butterscotch_alt_a_to_o-webfont.eot" />
+    <Content Include="Content\fonts\butterscotch_alt_a_to_o-webfont.ttf" />
+    <Content Include="Content\fonts\butterscotch_alt_a_to_o-webfont.woff" />
+    <Content Include="Content\fonts\butterscotch_alt_a_to_o-webfont.woff2" />
+    <Content Include="Content\fonts\Butterscotch_Alt_a_to_o.ttf" />
+    <Content Include="Content\fonts\butterscotch_alt_p_to_z-webfont.eot" />
+    <Content Include="Content\fonts\butterscotch_alt_p_to_z-webfont.ttf" />
+    <Content Include="Content\fonts\butterscotch_alt_p_to_z-webfont.woff" />
+    <Content Include="Content\fonts\butterscotch_alt_p_to_z-webfont.woff2" />
+    <Content Include="Content\fonts\Butterscotch_Alt_p_to_z.ttf" />
+    <Content Include="Content\fonts\butterscoth_alt_capitals-webfont.eot" />
+    <Content Include="Content\fonts\butterscoth_alt_capitals-webfont.ttf" />
+    <Content Include="Content\fonts\butterscoth_alt_capitals-webfont.woff" />
+    <Content Include="Content\fonts\butterscoth_alt_capitals-webfont.woff2" />
+    <Content Include="Content\fonts\Butterscoth_Alt_Capitals.ttf" />
+    <Content Include="Content\images\hearts.pdn" />
+    <Content Include="Content\lib\bootstrap\3.3.2\css\bootstrap-theme.css.map" />
+    <Content Include="Content\lib\bootstrap\3.3.2\css\bootstrap.css.map" />
+    <Content Include="Content\lib\bootstrap\3.3.2\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\lib\bootstrap\3.3.2\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\lib\bootstrap\3.3.2\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\lib\bootstrap\3.3.2\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\lib\bootstrap\3.3.4\css\bootstrap-theme.css.map" />
+    <Content Include="Content\lib\bootstrap\3.3.4\css\bootstrap.css.map" />
+    <Content Include="Content\lib\bootstrap\3.3.4\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\lib\bootstrap\3.3.4\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\lib\bootstrap\3.3.4\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\lib\bootstrap\3.3.4\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\alerts.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\badges.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\bootstrap.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\breadcrumbs.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\button-groups.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\buttons.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\carousel.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\close.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\code.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\component-animations.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\dropdowns.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\forms.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\glyphicons.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\grid.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\input-groups.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\jumbotron.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\labels.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\list-group.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\media.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\alerts.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\background-variant.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\border-radius.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\buttons.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\center-block.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\clearfix.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\forms.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\gradients.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\grid-framework.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\grid.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\hide-text.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\image.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\labels.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\list-group.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\nav-divider.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\nav-vertical-align.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\opacity.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\pagination.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\panels.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\progress-bar.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\reset-filter.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\resize.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\responsive-visibility.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\size.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\tab-focus.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\table-row.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\text-emphasis.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\text-overflow.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\mixins\vendor-prefixes.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\modals.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\navbar.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\navs.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\normalize.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\pager.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\pagination.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\panels.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\popovers.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\print.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\progress-bars.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\responsive-embed.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\responsive-utilities.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\scaffolding.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\tables.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\theme.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\thumbnails.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\tooltip.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\type.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\utilities.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\variables.less" />
+    <Content Include="Content\lib\bootstrap\3.3.4\less\wells.less" />
+    <None Include="Views\Shared\bride-and-groom.cshtml" />
+    <None Include="Views\Shared\feed.cshtml" />
+    <None Include="Views\Shared\people.cshtml" />
+    <None Include="Views\Shared\site.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50502</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8088</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

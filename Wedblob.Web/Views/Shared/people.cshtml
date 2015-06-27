@@ -1,0 +1,37 @@
+@model Wedblob.Web.Models.ContentFragment
+
+<section id="@Model.Data.navigationId" class="people">
+    <h2 class="section-header">@Model.Data.navigationTitle</h2>
+
+    <div class="container">
+      
+            @foreach(var group in IEnumerableExtensions.GroupsOf(Model.Data.people,2))
+            {
+                <div class="row">
+                    @{int col = 0;}
+                    @foreach (var person in group)
+                    {
+
+                        <div class="col-sm-6">
+                            <div class="@(col++%2==0?"left-column":"right-column")">
+                                <h3>
+                                    <div class="portrait">
+                                        <img src="@person.portrait" />
+                                    </div>
+                                    <div class="name-and-position">
+                                        <span class="name">@person.firstName @person.lastName</span>
+                                        <span class="position">@person.position</span>
+                                    </div>
+
+                                </h3>
+                                <p>@person.biography</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+        <div class="line-divider"></div>
+
+    </div>
+</section>
