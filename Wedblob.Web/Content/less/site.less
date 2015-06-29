@@ -7,7 +7,7 @@
 @font-fancy: "butterscotch", Georgia, serif;
 @font-nav:"museo-sans", Arial, Helvetica, sans-serif;
 
-@header-background-image: url('../images/symphony-red-strip.png');
+@header-background-image: url('../images/symphony-red.png');
 
 @text-color:#333;
 @sub-text-color:#aaa;
@@ -35,9 +35,48 @@ body{
   font-family: @font-body;
 }
 
+
+.width-limited{
+    max-width: @screen-lg;
+    margin-left:auto;
+    margin-right:auto;
+     @media (min-width: @screen-lg) { .fade-sides; }
+}
+
+
+.fade-sides{
+    position:relative;
+    &::before{
+        content:'';
+        background: transparent url('../images/fade-from-white.png') repeat-y left top;
+        position:absolute;
+        height:100%;
+        width:150px;
+        top:0;
+        left:0;
+
+               
+    }
+
+    &::after{
+         content:'';
+            background: transparent url('../images/fade-to-white.png') repeat-y right top;
+            position:absolute;
+            height:100%;
+            width:150px;
+            top:0;
+            right:0;
+        
+    }
+}
+
+
+
+
 nav {
+    .width-limited;
     text-align:center;
-    background: transparent @header-background-image repeat-y center center;
+    background: transparent @header-background-image repeat center center;
     ul {
         margin:0;
         padding:0;
@@ -90,10 +129,12 @@ nav {
 
 
 h2.section-header{
+  .width-limited;
+  max-width:1200px;
   text-align: center;
   font-size: 2.5em;
   margin:20px auto;
-  background: transparent @header-background-image repeat-y center center;
+  background: transparent @header-background-image repeat center center;
 
 
   overflow: visible;
@@ -113,6 +154,8 @@ h2.section-header{
   position:relative;
   overflow:hidden;
 }
+
+
 
 /**
  * dividers adding some flair between columns
@@ -180,26 +223,10 @@ h2.section-header{
   font-family: @font-fancy;
 }
 
-#heroBox::before{
-    content:'';
-    background-color:green;
-    position:absolute;
-    height:100%;
-    width:50px;
-    top:0;
-}
 
-#heroBox::after{
-    content:'';
-    background-color:green;
-    position:absolute;
-    height:100%;
-    width:50px;
-    right:0;
-    top:0;
-}
 
 #heroBox{
+    .width-limited;
     background-image: url('../images/hero-2.jpg');
     background-size:cover;
     background-repeat: no-repeat;
