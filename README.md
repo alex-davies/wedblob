@@ -1,6 +1,6 @@
-#Our wedding webiste
+#Our wedding website
 
-We am getting married, and this is a site announcing it to the world, and more importantly to the attendees.
+We are getting married, and this is a site announcing it to the world, and more importantly to the attendees.
 
 ##Design
 All design was done by my amazing bride. Without her both this site and the wedding day would have not been possible
