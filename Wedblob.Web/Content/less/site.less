@@ -7,12 +7,14 @@
 @font-fancy: "butterscotch", Georgia, serif;
 @font-nav:"museo-sans", Arial, Helvetica, sans-serif;
 
-@header-background-image: url('../images/symphony-red.png');
+@header-background-image: url('../images/symphony-red-small.png');
 
 @text-color:#333;
 @sub-text-color:#aaa;
 
-@flourish-color:maroon;
+@flourish-color:#990022;
+
+
 @sub-flourish-color:#666;
 @divider-color:#c6c6c6;
 
@@ -31,9 +33,10 @@
 body{
   line-height: 1.5em;
   font-size: 14px;
-  text-color:@text-color;
+  color:@text-color;
   font-family: @font-body;
 }
+
 
 
 .width-limited{
@@ -43,6 +46,9 @@ body{
      @media (min-width: @screen-lg) { .fade-sides; }
 }
 
+.no-break{
+    white-space:nowrap;
+}
 
 .fade-sides{
     position:relative;
@@ -70,6 +76,77 @@ body{
     }
 }
 
+label{
+    font-family: @font-nav;
+    text-transform:uppercase;
+    .required {
+        color:@flourish-color
+    }
+}
+
+.form-field-help-text{
+    font-style:italic;
+}
+
+label.btn{
+     text-transform:none;
+}
+
+label.attending-yes{
+    width:49%;
+    float:left;
+}
+
+label.attending-no{
+    width:49%;
+    float:right;
+}
+
+.btn{
+    border-color:@flourish-color;
+    border-width:2px;
+    font-size:1.3em;
+    font-family:@font-nav;
+}
+
+.btn:hover, .btn:focus, .btn:active, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.focus{
+    border-color:@flourish-color;
+    background-color:transparent;
+}
+
+.btn.active{
+    background-color:@flourish-color;
+    border-color:@flourish-color;
+    background-image:none;
+    border-width:2px;
+    color:white;
+    box-shadow:none;
+}
+
+.btn-primary{
+    background-color:@flourish-color;
+}
+
+.btn-primary[disabled]{
+    background-color:lightgray;
+    border-color:lightgray;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary.focus{
+    border-color:@flourish-color;
+    background-color:@flourish-color;
+}
+
+.btn:disabled, .btn{
+    transition: color 200ms ease,background-color 200ms ease,border-color 200ms ease;
+}
+
+#sendButton{
+    width:100%;
+     @media (min-width: @screen-sm)   {
+        width:49%;
+     }
+}
 
 
 
@@ -263,6 +340,8 @@ h2.section-header{
 
 
 section.bride-and-groom{
+  margin-top:60px;
+  margin-bottom:60px;
   h2{
     .name {
 
@@ -574,7 +653,7 @@ section.feed{
       display: block;
       background-color: white;
       overflow: hidden;
-      box-shadow: 2px 2px 10px #888888;;
+      box-shadow: 2px 2px 10px #888888;
       img{
         margin:auto;
       }

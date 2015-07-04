@@ -35,7 +35,7 @@
                 <ul>
                     @foreach (var content in Model.Data.content)
                     {
-                        if (!string.IsNullOrWhiteSpace(content.navigationId == null ? null : content.navigationId.ToString()))
+                        if (Model.HasPermission(content) && !string.IsNullOrWhiteSpace(content.navigationId == null ? null : content.navigationId.ToString()))
                         {
                             <li><a href="#@content.navigationId">@content.navigationTitle</a></li>
                         }
@@ -48,7 +48,11 @@
         @foreach (var content in Model.Data.content)
         {
             Wedblob.Web.Models.ContentFragment frag = Model.SubFragment(content);
-            Html.RenderPartial(frag.DataType, frag);
+            if (frag.HasPermission())
+            {
+                Html.RenderPartial(frag.DataType, frag);
+            }
+           
         }
 
        
@@ -96,67 +100,11 @@
 
 
 
-
-        @*@html.block('footer', function(model){
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        })*@
-
             @using (var context = Html.BeginScriptContext())
             {
                 context.AddScriptFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js");
                 context.AddScriptFile("//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js");
-                @*context.AddScriptBlock(
-                @<script type="application/javascript">
-                    $(function(){
-                        // Check the initial Poistion of the Sticky Header
-                        var $nav = $('nav');
-                        var navOffset = $nav.offset().top;
-                        var navIds = [];
-                        $nav.find('a').each(function(i,anchor){
-                            var $anchor = $(anchor);
-                            var href = $anchor.attr('href');
-                            if(href && href.indexOf('#') == 0)
-                                navIds.push(href.substring(1))
-                        });
-
-                        $(window).scroll(function(){
-                            $nav.toggleClass('navbar-fixed-top', $(window).scrollTop() > navOffset);
-                        });
-
-                        $(window).scroll(function(){
-                            var windowStart = $(window).scrollTop(); // get the offset of the window from the top of page
-                            var windowEnd = windowStart + $(window).height();
-
-                            var maxVisibleHeight = null;
-                            var maxVisibleHeightId = null;
-
-                            for (var i=0; i < navIds.length; i++) {
-                                var theID = navIds[i];
-                                var $section = $('#'+theID);
-                                var sectionStart = $section.offset().top;
-                                var sectionEnd = sectionStart + $section.height();
-
-                                var visibleHeight = Math.min(windowEnd, sectionEnd) - Math.max(windowStart, sectionStart)
-                                if(visibleHeight > 0 && visibleHeight > maxVisibleHeight){
-                                    maxVisibleHeight = visibleHeight;
-                                    maxVisibleHeightId = theID;
-                                }
-                            }
-
-                            for (var i=0; i < navIds.length; i++) {
-                                var theID = navIds[i];
-                                var $navItem =  $nav.find("a[href='#" + theID + "']").closest('li');
-                                $navItem.toggleClass('active', theID == maxVisibleHeightId);
-                            }
-
-                        });
-                    });
-                </script>);*@
             }
-
-            
-
             @Html.RenderScripts();
 
 		</body>

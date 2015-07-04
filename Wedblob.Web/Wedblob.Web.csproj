@@ -50,11 +50,16 @@
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\packages\Autofac.Mvc5.3.3.3\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="dotless.Core">
-      <HintPath>..\packages\dotless.1.4.4\lib\dotless.Core.dll</HintPath>
+    <Reference Include="dotless.Core, Version=1.5.0.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+      <HintPath>..\packages\dotless.1.5.0\lib\dotless.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Forloop.HtmlHelpers">
       <HintPath>..\packages\Forloop.HtmlHelpers.1.2.0.0\lib\net45\Forloop.HtmlHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Hashids.net, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\hashids.net.1.1.0\lib\net45\Hashids.net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -64,6 +69,15 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\MongoDB.Bson.2.0.1\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\MongoDB.Driver.2.0.1\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.0.1\lib\net45\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -117,12 +131,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\RSVPController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Extensions\HtmlExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Infrastructure\JsonResult.cs" />
+    <Compile Include="Infrastructure\Settings.cs" />
     <Compile Include="Infrastructure\Startup\FilterConfig.cs" />
     <Compile Include="Infrastructure\Startup\IStartupTask.cs" />
     <Compile Include="Infrastructure\Startup\RouteConfig.cs" />
@@ -130,6 +148,8 @@
     <Compile Include="Models\ContentFragment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ContentService.cs" />
+    <Compile Include="Services\IdGenerator.cs" />
+    <Compile Include="Services\RSVPService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\butterscotch-webfont.svg" />
@@ -148,6 +168,7 @@
     <Content Include="Content\images\light_grey.png" />
     <Content Include="Content\images\seamless_paper_texture.png" />
     <Content Include="Content\images\sos.png" />
+    <Content Include="Content\images\symphony-red-small.png" />
     <Content Include="Content\images\symphony-red-strip.png" />
     <Content Include="Content\images\symphony.png" />
     <Content Include="Content\lib\bootstrap\3.3.2\css\bootstrap-theme.css" />
@@ -192,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\" />
+    <Folder Include="Views\RSVP\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\content.json" />
@@ -318,6 +340,7 @@
     <Content Include="Content\lib\bootstrap\3.3.4\less\wells.less" />
     <None Include="Views\Shared\bride-and-groom.cshtml" />
     <None Include="Views\Shared\feed.cshtml" />
+    <Content Include="Views\Shared\rsvp.cshtml" />
     <None Include="Views\Shared\people.cshtml" />
     <None Include="Views\Shared\site.cshtml" />
   </ItemGroup>

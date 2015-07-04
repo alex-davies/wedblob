@@ -23,8 +23,30 @@ namespace Wedblob.Web.Infrastructure.Startup
 
             Routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}",
-                defaults: new { controller = "Default", action = "Index" }
+                url: "{tag}",
+                defaults: new { controller = "Default", action = "Index", tag = UrlParameter.Optional }
+            );
+
+
+            Routes.MapRoute(
+               name: "RSVPServiceIndex",
+               url: "api/rsvp",
+               defaults: new { controller = "RSVP", action = "Index" },
+               constraints: new { httpMethod = new HttpMethodConstraint(new[] { "GET" }) }
+           );
+
+            Routes.MapRoute(
+                name: "RSVPServiceGet",
+                url: "api/rsvp/{tag}",
+                defaults: new { controller = "RSVP", action = "Get" },
+                constraints: new { httpMethod = new HttpMethodConstraint(new[] { "GET" }) }
+            );
+
+            Routes.MapRoute(
+                name: "RSVPServicePost",
+                url: "api/rsvp/{tag}",
+                defaults: new { controller = "RSVP", action = "Post", tag = UrlParameter.Optional },
+                constraints: new { httpMethod = new HttpMethodConstraint(new[] { "POST" }) }
             );
         }
 
