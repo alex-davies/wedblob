@@ -1,0 +1,38 @@
+@model Wedblob.Web.Models.ContentFragment
+@{
+    var date = DateTime.Parse(Model.Data.date.ToString());
+}
+<section id="@Model.Data.navigationId" class="when-and-where">
+    <h2 class="section-header">@Model.Data.navigationTitle</h2>
+
+    <div class="container">
+        
+        <div class="time-container"> 
+            <time datetime="@date.ToString("r")">
+                <span>@date.ToString("dddd, MMMM dd")<sup>th</sup> @date.ToString("yyyy") </span>
+                <br/>
+                <span class="time">@date.ToString("HH:mm tt")</span>
+            </time>
+        </div>
+
+        <div class="at-container">at</div>
+
+        <div class="venue-container">
+            <p>
+                <span class="venue-name">@Html.Raw(Model.Data.venueName)</span>
+                <br/>
+                <span class="venue-address">@Html.Raw(Model.Data.venueAddress)</span>
+            </p>
+        </div>
+
+        
+   
+    </div>
+    @if (Model.Data.venueMapUrl != null)
+    {
+        <div class="container map-container">
+            <iframe src="@Model.Data.venueMapUrl" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    }
+    
+</section>

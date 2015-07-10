@@ -78,7 +78,10 @@ namespace Wedblob.Web.Controllers
         public async Task<ActionResult> Post(string tag, RSVPInputModel data)
         {
             int? id = null;
-            if (tag != null)
+
+            //if we are given a tag we will update that one
+            tag = string.IsNullOrEmpty(tag) ? data.tag : tag;
+            if (!string.IsNullOrEmpty(tag))
             {
                 var ids = _hashId.Decode(tag);
                 if (ids.Length == 0)

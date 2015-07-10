@@ -171,6 +171,7 @@
     <Content Include="Content\images\symphony-red-small.png" />
     <Content Include="Content\images\symphony-red-strip.png" />
     <Content Include="Content\images\symphony.png" />
+    <Content Include="Content\js\rsvp.js" />
     <Content Include="Content\lib\bootstrap\3.3.2\css\bootstrap-theme.css" />
     <Content Include="Content\lib\bootstrap\3.3.2\css\bootstrap-theme.min.css" />
     <Content Include="Content\lib\bootstrap\3.3.2\css\bootstrap.css" />
@@ -212,7 +213,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\js\" />
     <Folder Include="Views\RSVP\" />
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +341,7 @@
     <None Include="Views\Shared\bride-and-groom.cshtml" />
     <None Include="Views\Shared\feed.cshtml" />
     <Content Include="Views\Shared\rsvp.cshtml" />
+    <Content Include="Views\Shared\when-and-where.cshtml" />
     <None Include="Views\Shared\people.cshtml" />
     <None Include="Views\Shared\site.cshtml" />
   </ItemGroup>

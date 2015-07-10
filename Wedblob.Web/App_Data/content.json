@@ -27,10 +27,19 @@
             "type": "rsvp",
             "navigationTitle": "RSVP",
             "navigationId": "rsvp",
-            "requiredPermissions": ["rsvp"],
-            "isAttendingMessage": "Thanks {0}, we look forward to seeing you and {1} on the day",
-            "isNotAttendingMessage": "{0}, we are sorry you are unable to make it"
+            "requiredPermissions": [ "rsvp" ],
+            "isAttendingMessage": "Thanks {0}, we look forward to seeing you{1} on the day",
+            "isNotAttendingMessage": "{0}, we are sorry you{1} are unable to make it"
 
+        },
+        {
+            "type": "when-and-where",
+            "navigationTitle": "When & Where",
+            "navigationId": "whenAndWhere",
+            "date": "2016-04-10T10:30:00",
+            "venueName": "Cassells Wedding Venue, Auckland",
+            "venueAddress": "1012 Scenic Drive North.<br/>Swanson, Auckland 0614",
+            "venueMapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.4964399082655!2d174.54377420000003!3d-36.8784704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d6ba20e0a495b%3A0x6d5df8ea08f329d2!2sCassels!5e0!3m2!1sen!2suk!4v1436048961505"
         },
         {
             "type": "people",

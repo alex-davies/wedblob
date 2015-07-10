@@ -76,79 +76,130 @@ body{
     }
 }
 
-label{
-    font-family: @font-nav;
-    text-transform:uppercase;
-    .required {
-        color:@flourish-color
+section.rsvp{
+    label{
+        font-family: @font-nav;
+        text-transform:uppercase;
+        .required {
+            color:@flourish-color
+        }
     }
-}
 
-.form-field-help-text{
-    font-style:italic;
-}
+    .form-field-help-text{
+        font-style:italic;
+    }
 
-label.btn{
-     text-transform:none;
-}
+    label.btn{
+         text-transform:none;
+    }
 
-label.attending-yes{
-    width:49%;
-    float:left;
-}
-
-label.attending-no{
-    width:49%;
-    float:right;
-}
-
-.btn{
-    border-color:@flourish-color;
-    border-width:2px;
-    font-size:1.3em;
-    font-family:@font-nav;
-}
-
-.btn:hover, .btn:focus, .btn:active, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.focus{
-    border-color:@flourish-color;
-    background-color:transparent;
-}
-
-.btn.active{
-    background-color:@flourish-color;
-    border-color:@flourish-color;
-    background-image:none;
-    border-width:2px;
-    color:white;
-    box-shadow:none;
-}
-
-.btn-primary{
-    background-color:@flourish-color;
-}
-
-.btn-primary[disabled]{
-    background-color:lightgray;
-    border-color:lightgray;
-}
-
-.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary.focus{
-    border-color:@flourish-color;
-    background-color:@flourish-color;
-}
-
-.btn:disabled, .btn{
-    transition: color 200ms ease,background-color 200ms ease,border-color 200ms ease;
-}
-
-#sendButton{
-    width:100%;
-     @media (min-width: @screen-sm)   {
+    label.attending-yes{
         width:49%;
-     }
+        float:left;
+    }
+
+    label.attending-no{
+        width:49%;
+        float:right;
+    }
+
+    .btn{
+        border-color:@flourish-color;
+        border-width:2px;
+        font-size:1.3em;
+        font-family:@font-nav;
+    }
+
+    .btn:hover, .btn:focus, .btn:active, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.focus{
+        border-color:@flourish-color;
+        background-color:transparent;
+    }
+
+    .btn.active{
+        background-color:@flourish-color;
+        border-color:@flourish-color;
+        background-image:none;
+        border-width:2px;
+        color:white;
+        box-shadow:none;
+    }
+
+    .btn-primary{
+        background-color:@flourish-color;
+    }
+
+    .btn-primary[disabled]{
+        background-color:lightgray;
+        border-color:lightgray;
+    }
+
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary.focus{
+        border-color:@flourish-color;
+        background-color:@flourish-color;
+    }
+
+    .btn:disabled, .btn{
+        transition: color 200ms ease,background-color 200ms ease,border-color 200ms ease;
+    }
+
+    #sendButton{
+        width:100%;
+         @media (min-width: @screen-sm)   {
+            width:49%;
+         }
+    }
+
+    .attending-yes-container p, .attending-no-container p{
+        font-size:2em;
+        text-align:center;
+        margin-top: 20px;
+        margin-bottom:20px;
+    }
+
 }
 
+section.when-and-where{
+   
+    .time-container{
+         text-align:center;
+    font-size:2.0em;
+    line-height:1.5em;
+        .time{
+            font-weight:bold;
+        }
+    }
+    .at-container{
+         text-align:center;
+    font-size:2.0em;
+    line-height:1.5em;
 
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+    .venue-container{
+         text-align:center;
+    font-size:2.0em;
+    line-height:1.5em;
+        .venue-address{
+            font-style:italic;
+        }
+        .venue-name{
+            text-transform:uppercase;
+        }
+    }
+    .map-container.map-container{
+         @media (max-width: @screen-md)   {
+            margin:0;
+            padding:0;
+            width:100%;
+         }
+         iframe {
+            width:100%;
+            height:300px;
+        }
+    }
+    
+}
 
 nav {
     .width-limited;

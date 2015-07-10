@@ -6,7 +6,8 @@
     <div class="container">
       
         <div class="attending-unknown-container">
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="rsvpForm">
+                <input id="tagInput" type="hidden" value=""/>
                 <div class="form-group">
                     <label for="nameInput" class="col-sm-2 col-sm-offset-2 control-label"><span class="no-break">Name <span class="required">*</span></span></label>
                     <div class="col-sm-6">
@@ -29,7 +30,7 @@
                             <input type="radio" name="attending" id="attendingYes" value="true"> Yes
                         </label>
                         <label for="attendingNo" class="btn btn-default col-xs-6 attending-no">
-                            <input type="radio" name="attending" id="attendingNo" value="false"> No
+                            <input type="radio" name="attending" id="attendingNo" value=""> No
                         </label>
                     </div>
 
@@ -44,71 +45,17 @@
         </div>
 
         <div class="attending-yes-container">
-            <p>@Model.Data.isAttendingMessage</p>
+            <p data-text="@Model.Data.isAttendingMessage"></p>
         </div>
 
         <div class="attending-no-container">
-            <p>@Model.Data.isNotAttendingMessage</p>
+            <p data-text="@Model.Data.isNotAttendingMessage"></p>
         </div>
 
 
             @using (Html.BeginScriptContext())
             {
-                Html.AddScriptBlock(
-                    @<script type="text/javascript">
-                        (function ($) {
-
-                            var getParameterByName = function(name) {
-                                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-                                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                                    results = regex.exec(location.search);
-                                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-                            }
-
-                            var setRSVPMessage = function (rsvp) {
-                                rsvp = rsvp || { tag: undefined, attending: undefined, guests: [] }
-
-                                //we will start the poormans databinding, not worth using anything fancy as this is
-                                //the only thing in the site we need to databind
-                                //$('.attending-unknown-container').toggle(rsvp.attending === undefined);
-                                //$('.attending-yes-container').toggle(rsvp.attending === true);
-                                //$('.attending-no-container').toggle(rsvp.attending === false);
-
-                                $('#nameInput').val(rsvp.guests.length >= 1 ? rsvp.guests[0] : '');
-                                $('#guestInput').val(rsvp.guests.length >= 2 ? rsvp.guests.slice(1).join(', ') : '');
-
-
-                                $('#attendingYes').prop('checked', true);
-                                //$('#attendingYes').prop('checked', true || rsvp.attending === true);
-                                //$('#attendingNo').prop('checked', rsvp.attending === false);
-           
-                            }
-
-                            var setSendEnabledness = function () {
-                                $('#sendButton').prop('disabled', $('#nameInput').val().length == 0 || !$("input:radio[name='attending']").is(":checked"));
-                            }
-
-                            $("#nameInput").on('keyup', setSendEnabledness);
-                            $("input:radio[name='attending']").on('change', setSendEnabledness);
-
-                            (function () {
-                                var tag = getParameterByName("tag");
-
-                                if (tag) {
-                                    $.getJSON('/api/rsvp/' + tag, function (data, textStatus) {
-                                        setRSVPMessage(data);
-                                    }).error(function(){
-                                        setRSVPMessage();
-                                    });
-                                }
-                                else {
-                                    setRSVPMessage()
-                                }
-                            })()
-
-                        })(jQuery);
-                    </script>);
-
+                Html.AddScriptFile("/Content/js/rsvp.js");
             }
 
         </div>
