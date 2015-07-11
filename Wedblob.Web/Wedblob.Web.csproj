@@ -339,6 +339,7 @@
     <Content Include="Content\lib\bootstrap\3.3.4\less\variables.less" />
     <Content Include="Content\lib\bootstrap\3.3.4\less\wells.less" />
     <None Include="Views\Shared\bride-and-groom.cshtml" />
+    <Content Include="Views\Shared\plan.cshtml" />
     <None Include="Views\Shared\feed.cshtml" />
     <Content Include="Views\Shared\rsvp.cshtml" />
     <Content Include="Views\Shared\when-and-where.cshtml" />

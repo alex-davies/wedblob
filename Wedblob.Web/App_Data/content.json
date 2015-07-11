@@ -77,6 +77,25 @@
             ]
         },
         {
+            "type": "plan",
+            "navigationTitle": "The day",
+            "navigationId": "plan",
+            "timeline": [
+                {
+                    "title": "Guests Arrive",
+                    "date": "2015-01-01T10:30:00",
+                    "description": "Your arrive early as to not miss the the entrance from the bride. You try to calming the grooms nerves as he paces nervously awaiting for his bride"
+                },
+                {
+                    "title": "Here comes the bride",
+                    "date": "2015-01-01T11:00:00",
+                    "description": "The fanfare starts and she makes her grand entrance. All the guests are overcome with emotion and whisper amongst themselves about how beautifal she looks"
+                }
+
+            ]
+
+        },
+        {
             "type": "feed",
             "navigationTitle": "#alexandniluwed",
             "navigationId": "feed",
