@@ -2,6 +2,7 @@
 //@import "../../node_modules/bootstrap/less/mixins.less";
 @import "../lib/bootstrap/3.3.4/less/bootstrap.less";
 
+@import "icons.less";
 
 @font-body: "athelas", Georgia, serif;
 @font-fancy: "butterscotch", Georgia, serif;
@@ -81,6 +82,19 @@ body{
 
 
 nav {
+
+    .navbar-toggle {
+        font-size:1.5em;
+        .expanded{ display:inline;}
+        .collapsed{display:none;}
+    }
+
+    .navbar-toggle.collapsed {
+        .collapsed{ display:inline;}
+        .expanded{display:none;}
+    }
+    
+
     .width-limited;
     text-align:center;
     background: transparent @header-background-image repeat center center;
@@ -88,6 +102,9 @@ nav {
         margin:0;
         padding:0;
         display:flex;
+        @media (max-width: @screen-sm) {
+                display:block;
+            }
         li{
             font-family: @font-nav;
             letter-spacing: 3px;
@@ -104,6 +121,9 @@ nav {
                 line-height:2.5em;
             }
 
+            @media (max-width: @screen-sm) {
+                display:block;
+            }
            
         }
     }
@@ -367,14 +387,18 @@ section.when-and-where{
         }
     }
     .map-container.map-container{
-         @media (max-width: @screen-md)   {
-            margin:0;
-            padding:0;
+        margin:0 auto;
+        padding:0;
+        max-width:@screen-sm;
+        width:100%;
+        height:calc(0.6 * @screen-sm);        
+        @media (max-width: @screen-sm)   {
+            height:calc(0.4 * @screen-sm); 
+        }
+
+        iframe {
             width:100%;
-         }
-         iframe {
-            width:100%;
-            height:300px;
+            height:100%;
         }
     }
     
@@ -610,6 +634,14 @@ section.plan{
         border-top-left-radius: 50%;
         border-bottom-right-radius: 50%;
         border-bottom-left-radius: 50%;
+
+        background-color:@flourish-color;
+
+        .glyphicon{
+            width:100%;
+            margin:auto;
+            line-height:50px;
+        }
     }
 
     .timeline > li.timeline-inverted > .timeline-panel {
@@ -664,7 +696,7 @@ section.plan{
         margin-top: 5px;
     }
 
-    @media (max-width: @screen-lg) {
+    @media (max-width: @screen-md) {
         ul.timeline:before {
             left: 40px;
         }
@@ -699,12 +731,22 @@ section.plan{
             right: auto;
         }
     }
+
+
+
+
 }
 
 
 
 
 section.feed{
+    p{
+        font-size:1.8em;
+        line-height:1.5em;
+        padding-bottom:20px;
+    }
+
   #freewall{
     li{
       display: block;

@@ -29,20 +29,30 @@
         </section>
 
 
-        <nav>
-            
-            <div class="container">
-                <ul>
-                    @foreach (var content in Model.Data.content)
-                    {
-                        if (Model.HasPermission(content) && !string.IsNullOrWhiteSpace(content.navigationId == null ? null : content.navigationId.ToString()))
-                        {
-                            <li><a href="#@content.navigationId">@content.navigationTitle</a></li>
-                        }
-                    }
-                </ul>
-            </div>
-        </nav>
+            <nav class="navbar">
+
+                <div class="navbar-header">
+
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-menu-links" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="glyphicon glyphicon-menu-down collapsed" aria-hidden="true"></span> <span class="glyphicon glyphicon-menu-up expanded" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                <div class="container">
+                    <div class="collapse navbar-collapse" id="nav-menu-links">
+                        <ul>
+                            @foreach (var content in Model.Data.content)
+                            {
+                                if (Model.HasPermission(content) && !string.IsNullOrWhiteSpace(content.navigationId == null ? null : content.navigationId.ToString()))
+                                {
+                                    <li><a href="#@content.navigationId">@content.navigationTitle</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
 
         @foreach (var content in Model.Data.content)

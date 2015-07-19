@@ -1,4 +1,4 @@
-{
+﻿{
     "type": "site",
     "title": "Nilanthi & Alexander",
     "intro": "We are tying the knot!",
@@ -39,7 +39,7 @@
             "date": "2016-04-10T10:30:00",
             "venueName": "Cassells Wedding Venue, Auckland",
             "venueAddress": "1012 Scenic Drive North.<br/>Swanson, Auckland 0614",
-            "venueMapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.4964399082655!2d174.54377420000003!3d-36.8784704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d6ba20e0a495b%3A0x6d5df8ea08f329d2!2sCassels!5e0!3m2!1sen!2suk!4v1436048961505"
+            "venueMapUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d42938.243270280844!2d174.54395833764593!3d-36.8806817714442!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6d5df8ea08f329d2!2sCassels!5e0!3m2!1sen!2suk!4v1437162409749"
         },
         {
             "type": "people",
@@ -83,13 +83,44 @@
             "timeline": [
                 {
                     "title": "Guests Arrive",
+                    "icon": "icon-clock",
                     "date": "2015-01-01T10:30:00",
-                    "description": "Your arrive early as to not miss the the entrance from the bride. You try to calming the grooms nerves as he paces nervously awaiting for his bride"
+                    "description": "You arrive and exchange pleasantries with the other guests while the groom's nerves paces nervously awaiting his bride."
                 },
                 {
                     "title": "Here comes the bride",
                     "date": "2015-01-01T11:00:00",
-                    "description": "The fanfare starts and she makes her grand entrance. All the guests are overcome with emotion and whisper amongst themselves about how beautifal she looks"
+                    "description": "The fanfare starts and she makes her grand entrance, gliding down the aisle towards her awaiting husband. Whispers fill the area as everyone praises her beauty and elegance."
+                },
+                {
+                    "title": "The Ceremony",
+                    "date": "2015-01-01T11:05:00",
+                    "description": "The unique Sri Lanken fusion wedding ceremony begins. The celebrant steps you through everything that is happening from the first Gātha up to to the literal knot tying."
+                },
+                {
+                    "title": "Canapes, drinks and pictures",
+                    "date": "2015-01-01T11:30:00",
+                    "description": "The excitment of the ceremony has left you parched and peckish and you take full advantage of the canapes and drinks on offer. The couple will gather with family as the trigger happy photographers document the joyous occassion."
+                },
+                {
+                    "title": "Brunch",
+                    "date": "2015-01-01T12:00:00",
+                    "description": "The festivities move indoors for brunch. While your having your full of bacon, eggs and string hoppers the couples closest friends and family share some of their wisdom as well as some of their embarrasing anecdotes."
+                },
+                {
+                    "title": "Dancing",
+                    "date": "2015-01-01T14:00:00",
+                    "description": "The fludity and grace of the bride and groom's first dance leave you awe struck. Their perfomrance inspires you on the dance floor; now is the oppurtunity to show off your moves."
+                },
+                {
+                    "title": "Tea & Cake",
+                    "date": "2015-01-01T14:30:00",
+                    "description": "The cake is cut and served alongside an afternoon tea. Giving you time to calm down and reflect on this wonderful day."
+                },
+                {
+                    "title": "Off into the setting sun",
+                    "date": "2015-01-01T15:00:00",
+                    "description": "The now husband and wife make their exit amongst a shower of praise and well wishing. The couples day is not done however, more hours of photographs await them. But for you, it is time you eat the last of your cake and start your journey homeward."
                 }
 
             ]

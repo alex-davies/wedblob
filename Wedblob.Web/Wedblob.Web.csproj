@@ -159,6 +159,7 @@
     <Content Include="Content\fonts\butterscotch_alt_a_to_o-webfont.svg" />
     <Content Include="Content\fonts\butterscotch_alt_p_to_z-webfont.svg" />
     <Content Include="Content\fonts\butterscoth_alt_capitals-webfont.svg" />
+    <Content Include="Content\fonts\icomoon.svg" />
     <Content Include="Content\images\confectionary.png" />
     <Content Include="Content\images\fade-from-white.png" />
     <Content Include="Content\images\fade-to-white.png" />
@@ -338,6 +339,10 @@
     <Content Include="Content\lib\bootstrap\3.3.4\less\utilities.less" />
     <Content Include="Content\lib\bootstrap\3.3.4\less\variables.less" />
     <Content Include="Content\lib\bootstrap\3.3.4\less\wells.less" />
+    <Content Include="Content\less\icons.less" />
+    <Content Include="Content\fonts\icomoon.eot" />
+    <Content Include="Content\fonts\icomoon.ttf" />
+    <Content Include="Content\fonts\icomoon.woff" />
     <None Include="Views\Shared\bride-and-groom.cshtml" />
     <Content Include="Views\Shared\plan.cshtml" />
     <None Include="Views\Shared\feed.cshtml" />
