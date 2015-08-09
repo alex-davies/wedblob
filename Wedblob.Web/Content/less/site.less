@@ -2,7 +2,9 @@
 //@import "../../node_modules/bootstrap/less/mixins.less";
 @import "../lib/bootstrap/3.3.4/less/bootstrap.less";
 
+
 @import "icons.less";
+@import "ladda.min.css";
 
 @font-body: "athelas", Georgia, serif;
 @font-fancy: "butterscotch", Georgia, serif;
@@ -83,8 +85,18 @@ body{
 
 nav {
 
+    .width-limited;
+    text-align:center;
+    background: transparent @header-background-image repeat center center;
+
     .navbar-toggle {
         font-size:1.5em;
+        font-family:@font-nav;
+        float:none;
+        font-weight:bold;
+        .glyphicon{
+            font-size:0.8em
+        }
         .expanded{ display:inline;}
         .collapsed{display:none;}
     }
@@ -95,13 +107,14 @@ nav {
     }
     
 
-    .width-limited;
-    text-align:center;
-    background: transparent @header-background-image repeat center center;
+    
     ul {
         margin:0;
         padding:0;
         display:flex;
+        margin-top:10px;
+        margin-bottom:10px;
+        align-items:center;
         @media (max-width: @screen-sm) {
                 display:block;
             }
@@ -115,10 +128,11 @@ nav {
             text-transform:uppercase;
             text-align:center;
             flex-grow:1;
+            margin:10px 5px;
+            
             a:link, a:visited, a:hover, a:active {
                 color:@text-color;
                 text-decoration:none;
-                line-height:2.5em;
             }
 
             @media (max-width: @screen-sm) {
@@ -129,8 +143,6 @@ nav {
     }
 
 }
-
-
 
 .portrait{
   border-radius:50%;
@@ -147,26 +159,22 @@ nav {
   }
 }
 
-
-
 .sub-text{
   color:@sub-text-color;
 }
 
-
-
 h2.section-header{
-  .width-limited;
-  max-width:1200px;
-  text-align: center;
-  font-size: 2.5em;
-  margin:20px auto;
-  background: transparent @header-background-image repeat center center;
+    .width-limited;
+    max-width:1200px;
+    text-align: center;
+    font-size: 2.5em;
+    margin:20px auto;
+    background: transparent @header-background-image repeat center center;
 
 
-  overflow: visible;
+    overflow: visible;
 
-  padding:16px 0 16px 0;
+    padding:16px 0 16px 0;
   
   
     display:block;
@@ -175,6 +183,10 @@ h2.section-header{
     text-transform:uppercase;
     font-weight:bold;
     letter-spacing:6px;
+
+    @media (max-width: @screen-sm) {
+        font-size:1.8em;
+    }
 }
 
 .container{
@@ -206,20 +218,17 @@ h2.section-header{
 }
 
 .hearts-divider{
-  width:50px;
-  height: 40px;
-  margin-left:-25px;
-  margin-top:-20px;
+  width:90px;
+  height: 60px;
+  margin-left:-45px;
+  margin-top:-27px;
   position:absolute;
   left: 50%;
   top: 40%;
+  font-size:60px;
+  text-align:center;
+  color:@flourish-color;
 
-  .icon{
-    background: transparent url('../images/hearts.png') no-repeat center center;
-    width:50px;
-    height: 40px;
-    display: block;
-  }
   @media (max-width: @screen-sm) {
     top:auto;
   }
@@ -250,25 +259,38 @@ h2.section-header{
   font-family: @font-fancy;
 }
 
+.not-hero{
+    background-color:white;
+    margin-top:550px;
+     @media(max-width:@screen-sm){
+        margin-top:400px;   
+     }
+}
 
+section.hero-container{
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    z-index: -1;
+  .hero-image{
+      .width-limited;
+        background-image: url('../images/hero.jpg');
+        background-size:cover;
+        background-repeat: no-repeat;
+        background-position: top right;
+        margin:auto;
+        position:relative;
+        width: 100%;
+        max-width:1200px;
+        height: 550px; 
 
-#heroBox{
-    .width-limited;
-    background-image: url('../images/hero-2.jpg');
-    background-size:cover;
-    background-repeat: no-repeat;
-    background-position: top right;
-    margin:auto;
-    position:relative;
-
-  //background: url('../images/hero.jpg') no-repeat center center;
-//  position: fixed;
-  width: 100%;
-  max-width:1200px;
-  height: 550px; /*same height as jumbotron */
-  top:0;
-  left:0;
-  z-index: -1;
+        @media(max-width:@screen-sm){
+            background-image: url('../images/hero-sm.jpg');
+            background-position: bottom center;
+            height: 400px; 
+        }
+  }
 
   h1{
       font-family:@font-fancy;
@@ -280,7 +302,13 @@ h2.section-header{
       font-size:60px;
       letter-spacing:0.1em;
        @media (max-width: @screen-md) { padding-left:5%; font-size: 50px; }
-        @media (max-width: @screen-sm) { padding-left:2%; font-size: 40px; }
+        @media (max-width: @screen-sm) { 
+            width:100%;
+            text-align:center;
+            padding-left:0;
+            height:100%;
+
+        }
       .date{
           margin-top:30px;
           font-size:1.2em;
@@ -293,13 +321,12 @@ section.bride-and-groom{
   margin-bottom:60px;
   h2{
     .name {
-
       padding-top:30px;
       .first-name {
         font-size: 1.6em;
         display: block;
         @media (max-width: @screen-md) { font-size: 1.1em; }
-        @media (max-width: @screen-sm) { font-size: 1.6em; }
+        @media (max-width: @screen-sm) { font-size: 1.3em; }
       }
       .last-name {
         .sub-text;
@@ -475,6 +502,19 @@ section.rsvp{
          @media (min-width: @screen-sm)   {
             width:49%;
          }
+
+         &[data-loading]{
+             background-color:@flourish-color;
+             border-color:@flourish-color;
+         }
+    }
+
+    .attending-no-container, .attending-yes-container {
+        text-align: center;
+        font-size: 1.5em;
+        max-width: @screen-sm;
+        margin: auto;
+        line-height: 1.2;
     }
 }
 
@@ -547,12 +587,12 @@ section.plan{
     }
 
     .timeline:before {
-        top: 0;
-        bottom: 0;
+        top: 41px;
+        bottom: 165px;
         position: absolute;
         content: " ";
-        width: 3px;
-        background-color: #eeeeee;
+        width: 0px;
+        border-left: 2px dotted @divider-color;
         left: 50%;
         margin-left: -1.5px;
     }
@@ -596,7 +636,7 @@ section.plan{
     .timeline > li > .timeline-panel:before {
         position: absolute;
         top: 26px;
-        right: -15px;
+        right: -14px;
         display: inline-block;
         border-top: 15px solid transparent;
         border-left: 15px solid #ccc;
@@ -608,7 +648,7 @@ section.plan{
     .timeline > li > .timeline-panel:after {
         position: absolute;
         top: 27px;
-        right: -14px;
+        right: -13px;
         display: inline-block;
         border-top: 14px solid transparent;
         border-left: 14px solid #fff;
@@ -641,7 +681,9 @@ section.plan{
             width:100%;
             margin:auto;
             line-height:50px;
+            font-size:1.5em;
         }
+
     }
 
     .timeline > li.timeline-inverted > .timeline-panel {
@@ -651,14 +693,14 @@ section.plan{
     .timeline > li.timeline-inverted > .timeline-panel:before {
         border-left-width: 0;
         border-right-width: 15px;
-        left: -15px;
+        left: -14px;
         right: auto;
     }
 
     .timeline > li.timeline-inverted > .timeline-panel:after {
         border-left-width: 0;
         border-right-width: 14px;
-        left: -14px;
+        left: -13px;
         right: auto;
     }
 
@@ -685,6 +727,10 @@ section.plan{
     .timeline-title {
         margin-top: 0;
         color: inherit;
+        font-family: @font-nav;
+        font-size: 1em;
+        text-transform: uppercase;
+        font-weight: 700;
     }
 
     .timeline-body > p,
@@ -732,8 +778,15 @@ section.plan{
         }
     }
 
+    .glyphicon-time {
+            padding-right: 0.5em;
+            vertical-align: text-bottom;
+    }
 
-
+    .time {
+        text-transform: lowercase;
+        display: inline-block;
+    }
 
 }
 
@@ -776,3 +829,13 @@ section.feed{
   }
 }
 
+footer{
+    .width-limited;
+    background-color:@flourish-color;
+    text-align:center;
+    text-transform:uppercase;
+    font-family:@font-body;
+    color:white;
+    padding:7px;
+    margin-top:20px;
+}

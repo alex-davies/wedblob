@@ -84,6 +84,10 @@
             guests: guestsClean
         }
 
+        var submitButton = $('button[type=submit]', this);
+        var l = submitButton.ladda();
+        l.ladda('start');
+        var start = new Date().getTime();
         $.ajax({
             type: 'POST',
             url: '/api/rsvp/',
@@ -91,7 +95,14 @@
             contentType: "application/json",
             dataType: 'json'
         }).done(function (data) {
-            setRSVPMessage(data);
+            
+            var loadingTime = new Date().getTime() - start;
+            var timeout = Math.max(0, 1000 - loadingTime);
+            setTimeout(function () {
+                l.ladda('stop');
+                setRSVPMessage(data);
+            }, timeout)
+           
         });
     });
 

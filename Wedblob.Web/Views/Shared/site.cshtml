@@ -24,56 +24,63 @@
 
 		</head>
 		<body>
-        <section id="heroBox">
-            <h1><div class="intro">@Model.Data.intro</div><div class="date">@Model.Data.date</div></h1>
+        <section class="hero-container">
+            <div class="hero-image">
+                <h1><div class="intro">@Model.Data.intro</div><div class="date">@Model.Data.date</div></h1>
+            </div>
         </section>
+            <div class="not-hero">
 
+                <nav>
 
-            <nav class="navbar">
+                    <div class="navbar-header">
 
-                <div class="navbar-header">
-
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-menu-links" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="glyphicon glyphicon-menu-down collapsed" aria-hidden="true"></span> <span class="glyphicon glyphicon-menu-up expanded" aria-hidden="true"></span>
-                    </button>
-                </div>
-
-                <div class="container">
-                    <div class="collapse navbar-collapse" id="nav-menu-links">
-                        <ul>
-                            @foreach (var content in Model.Data.content)
-                            {
-                                if (Model.HasPermission(content) && !string.IsNullOrWhiteSpace(content.navigationId == null ? null : content.navigationId.ToString()))
-                                {
-                                    <li><a href="#@content.navigationId">@content.navigationTitle</a></li>
-                                }
-                            }
-                        </ul>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-menu-links" aria-expanded="false">
+                            <span class="glyphicon glyphicon-menu-down collapsed invisible" aria-hidden="true"></span> <span class="glyphicon glyphicon-menu-up expanded invisible" aria-hidden="true"></span>
+                            <span>Navigation Menu</span>
+                            <span class="glyphicon glyphicon-menu-down collapsed" aria-hidden="true"></span> <span class="glyphicon glyphicon-menu-up expanded" aria-hidden="true"></span>
+                        </button>
                     </div>
-                </div>
-            </nav>
+
+                    <div class="container">
+                        <div class="collapse navbar-collapse" id="nav-menu-links">
+                            <ul>
+                                @foreach (var content in Model.Data.content)
+                                {
+                                    if (Model.HasPermission(content) && !string.IsNullOrWhiteSpace(content.navigationId == null ? null : content.navigationId.ToString()))
+                                    {
+                                        <li><a href="#@content.navigationId">@content.navigationTitle</a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
 
 
-        @foreach (var content in Model.Data.content)
-        {
-            Wedblob.Web.Models.ContentFragment frag = Model.SubFragment(content);
-            if (frag.HasPermission())
-            {
-                Html.RenderPartial(frag.DataType, frag);
-            }
-           
-        }
+                @foreach (var content in Model.Data.content)
+                {
+                    Wedblob.Web.Models.ContentFragment frag = Model.SubFragment(content);
+                    if (frag.HasPermission())
+                    {
+                        Html.RenderPartial(frag.DataType, frag);
+                    }
 
-       
+                }
 
 
-            @using (var context = Html.BeginScriptContext())
-            {
-                context.AddScriptFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js");
-                context.AddScriptFile("//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js");
-            }
-            @Html.RenderScripts();
 
+
+                @using (var context = Html.BeginScriptContext())
+                {
+                    context.AddScriptFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js");
+                    context.AddScriptFile("//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js");
+                    context.AddScriptFile("/Content/js/site.js");
+                    
+                }
+                @Html.RenderScripts();
+
+
+            </div>
 		</body>
 	</html>

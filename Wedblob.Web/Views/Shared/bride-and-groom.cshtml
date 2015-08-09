@@ -44,19 +44,17 @@
 
     <div class="container biography">
         <div class="col-sm-6 left-side">
-            <p>@Model.Data.bride.biography</p>
+            <p>@Html.Raw(Model.Data.bride.biography)</p>
         </div>
 
         <div class="line-divider">
-            <div class="hearts-divider">
-                <span class="icon"/>
-            </div>
+            <i class="hearts-divider icon-hearts"></i>
         </div>
 
 
 
         <div class="col-sm-6 right-side">
-            <p>@Model.Data.groom.biography</p>
+            <p>@Html.Raw(@Model.Data.groom.biography)</p>
         </div>
     </div>
 </section>

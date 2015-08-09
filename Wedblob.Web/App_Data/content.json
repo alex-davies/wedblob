@@ -11,14 +11,14 @@
             "bride": {
                 "firstName": "Nilanthi",
                 "lastName": "Seneviratne",
-                "portrait": "http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
-                "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit. Nullam dignissim ultricies elit tempus lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est."
+                "portrait": "/Content/images/people/nilanthi.jpg",
+                "biography": "<p>When I met Alex for the first time (via my bestie), I thought he was standoffish. He was very quiet and only answered in monosyllabic words. It took at least a month before I discovered that he has a razor sharp wit and a dry sense of humour. When it was clear that he liked me I had to twist his arm to ask me out! But he showed his romantic side when he sent me on a treasure hunt that ended with roses and stuffed toys! <3 </p><p>In the last eight years we've graduated, had our OE, had a long distance relationship (because Alex couldn't make up his mind about where to move), and moved all the way to the other side of the world. When he finally asked me to marry him in one of the most scenic destinations, I couldn't have been happier. I can't wait to start spending the rest of my life with him.</p>"
             },
             "groom": {
                 "firstName": "Alexander",
                 "lastName": "Davies",
-                "portrait": "http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
-                "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit. Nullam dignissim ultricies elit tempus lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est."
+                "portrait": "/Content/images/people/alex.jpg",
+                "biography": "<p>When I first met Nilu she was the talkative friend of a university classmate. Initially she would hang around in the computer labs generally being distracting but I soon warmed up to her and eventually found myself specifically seeking her out in the labs. I finally took the initiative and made elaborate plans to ask her out. What followed were some of the best eight years of my life, we graduated, travelled and just generally spent time together, but the true highlight was doing all of this with her. </p><p>After a short long distance relationship (because she was reluctant to move to Australia) I finally decided it was time, the location would be Kanazawa in Japan and armed with a ring, my dashing good looks, and some improvised planning I set out to make Nilanthi my wife.</p>"
             }
 
 
@@ -28,15 +28,15 @@
             "navigationTitle": "RSVP",
             "navigationId": "rsvp",
             "requiredPermissions": [ "rsvp" ],
-            "isAttendingMessage": "Thanks {0}, we look forward to seeing you{1} on the day",
-            "isNotAttendingMessage": "{0}, we are sorry you{1} are unable to make it"
+            "isAttendingMessage": "Thanks {0}, we look forward to seeing you{1} on the day. If you have queries or comments email us at <a href='mailto:alexandniluwed@gmail.com'>alexandniluwed@gmail.com</a>",
+            "isNotAttendingMessage": "{0}, we are sorry you{1} are unable to make it. If you have queries or comments email us at <a href='mailto:alexandniluwed@gmail.com'>alexandniluwed@gmail.com</a>"
 
         },
         {
             "type": "when-and-where",
             "navigationTitle": "When & Where",
             "navigationId": "whenAndWhere",
-            "date": "2016-04-10T10:30:00",
+            "date": "2016-04-10T10:00:00",
             "venueName": "Cassells Wedding Venue, Auckland",
             "venueAddress": "1012 Scenic Drive North.<br/>Swanson, Auckland 0614",
             "venueMapUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d42938.243270280844!2d174.54395833764593!3d-36.8806817714442!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6d5df8ea08f329d2!2sCassels!5e0!3m2!1sen!2suk!4v1437162409749"
@@ -50,77 +50,84 @@
                     "firstName": "Anuradha",
                     "lastName": "Seneviratne",
                     "position": "Maid of honour",
-                    "portrait": "http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
-                    "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit."
+                    "portrait": "/Content/images/people/anuradha.jpg",
+                    "biography": "<em>Sister, confidante, and overall amazing person.</em> I've known Anuradha since the time she was born. Some of our antics during the last 25 years of sisterhood have included: driving our parents crazy by singing The Smurfs theme song, fighting with our brother (we love you bro! <3), and supporting each other through the big move to NZ (then Aus). It's totes awesome to have her stand up as the maid of honour!"
                 },
                 {
                     "firstName": "Varun",
                     "lastName": "Prasad",
                     "position": "Best man",
-                    "portrait": "http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
-                    "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit."
+                    "portrait": "/Content/images/people/varun.jpg",
+                    "biography": "<em>Classmate, movie fanatic, and fellow software developer.</em> We first meet in the formative high school years, Our friendship was strengthened by friendly competition and nonsensical debates that continued through to university. We briefly entered the professional world together as co-CEO's of our shortlived company, Backslash Software. Varun is my closest friend and it is an honour to have him as my best man."
                 },
                 {
                     "firstName": "Ramya",
                     "lastName": "Prasad",
                     "position": "Brides maid",
-                    "portrait": "http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
-                    "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit."
+                    "portrait": "/Content/images/people/ramya.jpg",
+                    "biography": "<em>Batch mate, co-conspirator, and kickass bestie.</em> I met Ramya when we sat next to each other in SOFTENG 250 class. Although I doubt we can remember what was in those lectures now, I can remember all the times I stayed up for assignments, sleep overs where we 'studied' (read: gossip about boys) and had a great time. It's wonderful to have her as a bridesmaid!"
                 },
                 {
-                    "firstName": "?????",
-                    "lastName": "",
-                    "position": "Man of mystery",
-                    "portrait": "http://logicathemes.com/yes/images/important-people/groomsman1.jpg",
-                    "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus ex, tincidunt nec dui sed, elementum ultrices est. Nam rutrum ultrices urna, in pretium ligula aliquet id. Suspendisse mi est, euismod et lorem blandit, porttitor consequat elit."
+                    "firstName": "Edmund",
+                    "lastName": "Yeung",
+                    "position": "Groomsman",
+                    "portrait": "/Content/images/people/edmund.jpg",
+                    "biography": "<em>Colleague, friend and world traveller.</em> We've known each other since university and when it was time to enter the professional world I was fortunate enough to work with Edmund. When Edmund went off to travel Europe it wasn't long before I did the same, and once again we found ourselves working and travelling together. Edmund is a fantastic person and a great friend it is a pleasure to have him as my groomsman."
                 }
             ]
         },
         {
             "type": "plan",
-            "navigationTitle": "The day",
+            "navigationTitle": "On The day",
             "navigationId": "plan",
             "timeline": [
                 {
-                    "title": "Guests Arrive",
-                    "icon": "icon-clock",
-                    "date": "2015-01-01T10:30:00",
-                    "description": "You arrive and exchange pleasantries with the other guests while the groom's nerves paces nervously awaiting his bride."
+                    "title": "Guests arrive",
+                    "icon": "icon-groom",
+                    "date": "2015-01-01T10:00:00",
+                    "description": "Arrive and exchange pleasantries with the other guests while the groom paces nervously awaiting his bride."
                 },
                 {
                     "title": "Here comes the bride",
-                    "date": "2015-01-01T11:00:00",
-                    "description": "The fanfare starts and she makes her grand entrance, gliding down the aisle towards her awaiting husband. Whispers fill the area as everyone praises her beauty and elegance."
+                    "icon": "icon-bride",
+                    "date": "2015-01-01T10:30:00",
+                    "description": "The fanfare starts and she makes her grand entrance, gliding down the aisle towards her awaiting groom. Whispers fill the air as everyone praises her beauty and elegance."
                 },
                 {
                     "title": "The Ceremony",
-                    "date": "2015-01-01T11:05:00",
-                    "description": "The unique Sri Lanken fusion wedding ceremony begins. The celebrant steps you through everything that is happening from the first Gātha up to to the literal knot tying."
+                    "icon": "icon-ceremony",
+                    "date": "2015-01-01T10:35:00",
+                    "description": "The unique fusion wedding ceremony begins. The celebrant steps you through everything that is happening from the first gātha up to the bride and groom literally tying the knot."
                 },
                 {
                     "title": "Canapes, drinks and pictures",
-                    "date": "2015-01-01T11:30:00",
+                    "icon": "icon-drink",
+                    "date": "2015-01-01T11:00:00",
                     "description": "The excitment of the ceremony has left you parched and peckish and you take full advantage of the canapes and drinks on offer. The couple will gather with family as the trigger happy photographers document the joyous occassion."
                 },
                 {
                     "title": "Brunch",
+                    "icon": "icon-breakfast",
                     "date": "2015-01-01T12:00:00",
-                    "description": "The festivities move indoors for brunch. While your having your full of bacon, eggs and string hoppers the couples closest friends and family share some of their wisdom as well as some of their embarrasing anecdotes."
+                    "description": "The festivities move indoors for brunch. While having your fill of bacon, eggs, and string hoppers listen in on the couple's closest friends and family as they share some of their wisdom for a happy marriage as well as anecdotes to embarass the couple."
                 },
                 {
                     "title": "Dancing",
+                    "icon": "icon-dance",
                     "date": "2015-01-01T14:00:00",
-                    "description": "The fludity and grace of the bride and groom's first dance leave you awe struck. Their perfomrance inspires you on the dance floor; now is the oppurtunity to show off your moves."
+                    "description": "The fludity and grace of the bride and groom's first dance leave you awe struck. Their performance inspires you on to the dance floor; now is the oppurtunity to show off your moves."
                 },
                 {
                     "title": "Tea & Cake",
+                    "icon": "icon-wedding-cake",
                     "date": "2015-01-01T14:30:00",
-                    "description": "The cake is cut and served alongside an afternoon tea. Giving you time to calm down and reflect on this wonderful day."
+                    "description": "The wedding cake is cut and served alongside afternoon tea. Giving you time to calm down and reflect on this wonderful day."
                 },
                 {
                     "title": "Off into the setting sun",
+                    "icon": "icon-sunset",
                     "date": "2015-01-01T15:00:00",
-                    "description": "The now husband and wife make their exit amongst a shower of praise and well wishing. The couples day is not done however, more hours of photographs await them. But for you, it is time you eat the last of your cake and start your journey homeward."
+                    "description": "The new husband and wife make their exit amongst a shower of praise and well wishing. The couple's day is not done however, more hours of photographs await them. But for you, it is time you finished the last of your cake and start your journey homeward."
                 }
 
             ]
