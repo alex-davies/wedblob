@@ -12,6 +12,29 @@
         });
     };
 
+    var minDelayResponse = function (promise, minDelay) {
+        var deferred = $.Deferred();
+        var start = new Date().getTime();
+        promise.done(function () {
+            var loadingTime = new Date().getTime() - start;
+            var timeout = Math.max(0, 1000 - loadingTime);
+            var self = this;
+            var args = arguments;
+            setTimeout(function () {
+                deferred.resolveWith(self, args);
+            }, timeout);
+        }).fail(function () {
+            var loadingTime = new Date().getTime() - start;
+            var timeout = Math.max(0, 1000 - loadingTime);
+            var self = this;
+            var args = arguments;
+            setTimeout(function () {
+                deferred.rejectWith(self, args);
+            }, timeout);
+        });
+        return deferred.promise();
+    }
+
     var firstName = function (name) {
         return name.split(' ')[0];
     }
@@ -28,7 +51,7 @@
         rsvp.guests = rsvp.guests || [];
 
 
-        //we will start the poormans databinding, not worth using anything fancy as this is
+        //we will start the poor-mans databinding, not worth using anything fancy as this is
         //the only thing in the site we need to databind
         $('.attending-unknown-container').toggle(rsvp.attending === undefined || rsvp.attending === null);
         $('.attending-yes-container').toggle(rsvp.attending === true);
@@ -79,33 +102,35 @@
         }
 
         var rsvp = {
-            tag: $('#tagInput').val(),
             attending: !!$("input:radio[name='attending']:checked").val(),
             guests: guestsClean
         }
 
+        var tag = $('#tagInput').val();
+        var isUpdate = tag ? true :false;
+
         var submitButton = $('button[type=submit]', this);
         var l = submitButton.ladda();
         l.ladda('start');
-        var start = new Date().getTime();
-        $.ajax({
-            type: 'POST',
-            url: '/api/rsvp/',
+        
+        var delayedCall = minDelayResponse($.ajax({
+            type: isUpdate ? 'PUT' : 'POST',
+            url: '/api/rsvp/' + (isUpdate ? '' : tag),
             data: JSON.stringify(rsvp),
             contentType: "application/json",
             dataType: 'json'
-        }).done(function (data) {
-            
-            var loadingTime = new Date().getTime() - start;
-            var timeout = Math.max(0, 1000 - loadingTime);
-            setTimeout(function () {
-                l.ladda('stop');
-                setRSVPMessage(data);
-            }, timeout)
-           
-        });
+        }), 1000)
+
+        delayedCall.done(function (data) {
+            setRSVPMessage(data);
+        }).fail(function (data) {
+             alert('Something has gone wrong :(')
+        }).always(function () {
+            l.ladda('stop');
+        });;
     });
 
+    
 
     var setSendEnabledness = function () {
         $('#sendButton').prop('disabled', $('#nameInput').val().length == 0 || !$("input:radio[name='attending']").is(":checked"));
@@ -122,6 +147,7 @@
         if (tag) {
             $('#tagInput').val(tag);
             $.getJSON('/api/rsvp/' + tag, function (data, textStatus) {
+                debugger;
                 setRSVPMessage(data);
             }).error(function () {
                 setRSVPMessage();

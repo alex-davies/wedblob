@@ -1,4 +1,5 @@
 ﻿using HashidsNet;
+using Raven.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Wedblob.Web.Models;
 using Wedblob.Web.Services;
 
 namespace Wedblob.Web.Controllers
@@ -26,82 +28,125 @@ namespace Wedblob.Web.Controllers
 
     public class RSVPController : BaseController
     {
-        private readonly IRSVPService _rsvpService;
         private readonly Hashids _hashId;
+        private readonly IDocumentStore _documentStore;
 
-        public RSVPController(Hashids hashId, IRSVPService rsvpService)
+        public RSVPController(Hashids hashId, IDocumentStore documentStore)
         {
-            this._rsvpService = rsvpService;
             this._hashId = hashId;
+            this._documentStore = documentStore;
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index([Bind(Prefix = "$skip")] int? skip = null, [Bind(Prefix = "$top")]int? top = null)
         {
-            var rsvps = await _rsvpService.FetchAll();
-           
-            return Json(rsvps.Select(rsvp=>(new RSVPOutputModel()
+            using (var session = _documentStore.OpenAsyncSession())
             {
-                attending = rsvp.Attending,
-                guests = rsvp.Guests,
-                tag = rsvp.Id.HasValue ? _hashId.Encode(rsvp.Id.Value) : null
-            })).ToList());
+                IQueryable<RSVP> rsvps = session.Query<RSVP>();
+                if (skip != null)
+                    rsvps = rsvps.Skip(skip.Value);
+                if (top != null)
+                    rsvps = rsvps.Take(top.Value);
+
+ 
+                return Json(await rsvps.Select(rsvp => (new RSVPOutputModel()
+                {
+                    attending = rsvp.Attending,
+                    guests = rsvp.Guests,
+                    tag = rsvp.Tag
+                })).ToListAsync());
+            }
+
+            
         }
 
         [HttpGet]
         public async Task<ActionResult> Get(string tag)
         {
-            int id;
-            try
+            if(string.IsNullOrWhiteSpace(tag))
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            using (var session = _documentStore.OpenAsyncSession())
             {
-                var ids = _hashId.Decode(tag);
-                if (ids.Length == 0)
+                RSVP rsvp = await session.Query<RSVP>().FirstOrDefaultAsync(x => x.Tag == tag);
+                if (rsvp == null)
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-                id = ids[0];
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-            }
+                
 
-            var rsvp = await _rsvpService.Fetch(id);
-
-            return Json(new RSVPOutputModel()
-            {
-                attending = rsvp.Attending,
-                guests = rsvp.Guests,
-                tag = rsvp.Id.HasValue ? _hashId.Encode(rsvp.Id.Value) : null
-            });
+                return Json(new RSVPOutputModel()
+                {
+                    attending = rsvp.Attending,
+                    guests = rsvp.Guests,
+                    tag = rsvp.Tag
+                });
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(string tag, RSVPInputModel data)
+        public async Task<ActionResult> Post(RSVPInputModel data)
         {
-            int? id = null;
-
-            //if we are given a tag we will update that one
-            tag = string.IsNullOrEmpty(tag) ? data.tag : tag;
-            if (!string.IsNullOrEmpty(tag))
+            using (var session = _documentStore.OpenAsyncSession())
             {
-                var ids = _hashId.Decode(tag);
-                if (ids.Length == 0)
-                    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-                id = ids[0];
+                var rsvp = new RSVP();
+                await session.StoreAsync(rsvp);
+
+                rsvp.Tag = data.tag ?? GenerateTagFromId(rsvp.Id);
+                rsvp.Guests = data.guests;
+                rsvp.Attending = data.attending;
+                rsvp.Updated = DateTime.UtcNow;
+
+
+                await session.SaveChangesAsync();
+
+                return Json(new RSVPOutputModel()
+                {
+                    attending = rsvp.Attending,
+                    guests = rsvp.Guests,
+                    tag = rsvp.Tag
+                });
             }
+        }
 
-            var rsvp = await _rsvpService.Store(new RSVP()
-            {
-                Id = id,
-                Guests = data.guests,
-                Attending = data.attending
-            });
+        [HttpPut]
+        public async Task<ActionResult> Put(string tag, RSVPInputModel data)
+        {
+            if (string.IsNullOrWhiteSpace(tag))
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                
 
-            return Json(new RSVPOutputModel()
+            using (var session = _documentStore.OpenAsyncSession())
             {
-                attending = rsvp.Attending,
-                guests = rsvp.Guests,
-                tag = rsvp.Id.HasValue ? _hashId.Encode(rsvp.Id.Value) : null
-            });
+
+                RSVP rsvp = await session.Query<RSVP>().FirstOrDefaultAsync(x => x.Tag == tag);
+                if(rsvp == null)
+                        return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+                rsvp.Guests = rsvp.Guests ?? data.guests;
+                rsvp.Attending = rsvp.Attending ?? data.attending;
+                rsvp.Tag = rsvp.Tag ?? data.tag;
+                rsvp.Updated = DateTime.UtcNow;
+
+                await session.SaveChangesAsync();
+
+                return Json(new RSVPOutputModel()
+                {
+                    attending = rsvp.Attending,
+                    guests = rsvp.Guests,
+                    tag = rsvp.Tag
+                });
+            }
+        }
+
+        private string GenerateTagFromId(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+                return null;
+
+            var intPartString = id.Substring(id.IndexOf('/')+1);
+            int intPart;
+            if (!int.TryParse(intPartString, out intPart))
+                return null;
+            return _hashId.Encode(intPart);
         }
     }
 }

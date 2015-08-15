@@ -43,11 +43,18 @@ namespace Wedblob.Web.Infrastructure.Startup
             );
 
             Routes.MapRoute(
-                name: "RSVPServicePost",
+                name: "RSVPServicePut",
                 url: "api/rsvp/{tag}",
-                defaults: new { controller = "RSVP", action = "Post", tag = UrlParameter.Optional },
-                constraints: new { httpMethod = new HttpMethodConstraint(new[] { "POST" }) }
+                defaults: new { controller = "RSVP", action = "Put"},
+                constraints: new { httpMethod = new HttpMethodConstraint(new[] { "PUT" }) }
             );
+
+            Routes.MapRoute(
+               name: "RSVPServicePost",
+               url: "api/rsvp/",
+               defaults: new { controller = "RSVP", action = "Post" },
+               constraints: new { httpMethod = new HttpMethodConstraint(new[] { "POST" }) }
+           );
         }
 
         public int ExecutionOrder

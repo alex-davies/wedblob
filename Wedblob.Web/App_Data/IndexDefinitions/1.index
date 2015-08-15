@@ -1,0 +1,28 @@
+{
+  "IndexId": 1,
+  "Name": "Auto/RSVPs/ByTag",
+  "LockMode": "Unlock",
+  "Map": "from doc in docs.RSVPs\nselect new {\n\tTag = doc.Tag\n}",
+  "Maps": [
+    "from doc in docs.RSVPs\nselect new {\n\tTag = doc.Tag\n}"
+  ],
+  "Reduce": null,
+  "IsMapReduce": false,
+  "IsCompiled": false,
+  "Stores": {},
+  "Indexes": {},
+  "SortOptions": {},
+  "Analyzers": {},
+  "Fields": [],
+  "Suggestions": {},
+  "TermVectors": {},
+  "SpatialIndexes": {},
+  "InternalFieldsMapping": {
+    "Tag": "Tag"
+  },
+  "MaxIndexOutputsPerDocument": null,
+  "Type": "Auto",
+  "DisableInMemoryIndexing": false,
+  "IsTestIndex": false,
+  "IsSideBySideIndex": false
+}
