@@ -1,14 +1,16 @@
 //@import "../../node_modules/bootstrap/less/variables.less";
 //@import "../../node_modules/bootstrap/less/mixins.less";
-@import "../lib/bootstrap/3.3.4/less/bootstrap.less";
+@import (reference) "../lib/bootstrap/3.3.4/less/bootstrap.less";
 
 
 @import "icons.less";
-@import "../lib/ladda/0.9.8/ladda.min.css";
+@import "../lib/ladda/0.9.8/ladda-themeless.min.css";
 
-@font-body: "athelas", Georgia, serif;
+@font-body: "athelas-n4","athelas", Georgia, serif;
 @font-fancy: "butterscotch", Georgia, serif;
-@font-nav:"museo-sans", Arial, Helvetica, sans-serif;
+@font-nav:"museo-sans-n3", "museo-sans", Arial, Helvetica, sans-serif;
+@intro-font-size: 1.5em;
+@intro-line-height: 1.3;
 
 @header-background-image: url('../images/symphony-red-small.png');
 
@@ -38,6 +40,7 @@ body{
   font-size: 14px;
   color:@text-color;
   font-family: @font-body;
+  font-style:normal;
 }
 
 
@@ -80,8 +83,61 @@ body{
 }
 
 
+label.btn{
+   text-transform:none;
+}
+
+.btn{
+    border-color:@flourish-color;
+    border-width:2px;
+    font-family:@font-nav;
+    letter-spacing: 1px;
+}
+
+.btn:hover, .btn:focus, .btn:active, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.focus{
+    border-color:@flourish-color;
+    background-color:transparent;
+}
+
+.btn.active{
+    background-color:@flourish-color;
+    border-color:@flourish-color;
+    background-image:none;
+    border-width:2px;
+    color:white;
+    box-shadow:none;
+}
+
+.btn-primary{
+    background-color:@flourish-color;
+}
+
+.btn-primary[disabled], .btn-primary[disabled]:hover{
+    background-color:@flourish-color;
+    border-color:@flourish-color;
+}
 
 
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary.focus{
+    border-color:@flourish-color;
+    background-color:@flourish-color;
+}
+
+.btn:disabled, .btn{
+    transition: color 200ms ease,background-color 200ms ease,border-color 200ms ease;
+}
+
+button{
+    text-transform:uppercase;
+    font-weight: bold;
+}
+
+button[disabled][data-loading] {
+    background-color: @flourish-color;
+    border-color: @flourish-color;
+    color: white;
+    letter-spacing: 1px;
+}
 
 nav {
 
@@ -387,25 +443,25 @@ section.bride-and-groom{
 section.when-and-where{
    
     .time-container{
-         text-align:center;
-    font-size:2.0em;
-    line-height:1.5em;
+        text-align:center;
+        font-size:@intro-font-size;
+        line-height:@intro-line-height;
         .time{
             font-weight:bold;
         }
     }
     .at-container{
-         text-align:center;
-    font-size:2.0em;
-    line-height:1.5em;
+        text-align:center;
+        font-size:@intro-font-size;
+        line-height:@intro-line-height;
 
         margin-top:20px;
         margin-bottom:20px;
     }
     .venue-container{
-         text-align:center;
-    font-size:2.0em;
-    line-height:1.5em;
+        text-align:center;
+        font-size:@intro-font-size;
+        line-height:@intro-line-height;
         .venue-address{
             font-style:italic;
         }
@@ -432,90 +488,157 @@ section.when-and-where{
 }
 
 section.rsvp{
+
+    .intro-instructions{
+        text-align:center;
+        .email{
+            font-weight:bold;
+        }
+        margin-bottom:20px;
+       font-size:@intro-font-size;
+        line-height:@intro-line-height;
+    }
+
+    .search-instructions{
+        padding-bottom:0;
+        margin-bottom:5px;
+        text-align:center;
+        font-style:italic;
+        font-size: 1.3em;
+    }
+
+    .search-form button{
+        width:100%;
+        @media (max-width: @screen-sm)   {
+            margin-top:10px;
+        }
+    }
+
+    .search-results:empty{
+        max-height:0;
+    }
+
+
+
+
+    .search-results {
+        .header { 
+            font-family: @font-nav;
+            font-size: 1.3em;
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            display:none;
+
+        }
+        .search-result-items {
+            font-family: @font-nav;
+ 
+            li{
+                overflow:hidden;
+                .row-container{
+                     padding-top:20px;
+                    padding-bottom:20px;
+                    border-bottom: 1px dotted @divider-color;
+                }
+
+               
+                &:first-child .row-container{
+                    border-top: 1px dotted @divider-color;
+                }
+
+
+                .overview-only{ visibility:visible; opacity:1; transition:opacity 0.25s ease-out; }
+                &.detail .overview-only, &.responded .overview-only{ visibility:hidden; opacity:0; }
+
+                .detail-only{ visibility:hidden; opacity:0; transition:opacity 0.25s ease-out; }
+                &.detail .detail-only, &.responded .detail-only{ visibility:visible; opacity:1;  }
+
+                .detail-button-container{
+                    position:absolute;
+                    right:15px;
+                    button{
+                        padding:4px 18px;
+                    }
+                }
+
+
+
+                .guest-placeholder{
+                    position:absolute; /*hack so it can take the same space as the text box on detail view*/
+                }
+
+
+                select{
+                    transition:opacity 0.25s ease-out;
+                    &[disabled]{
+                        opacity:0.3;
+                    }
+                }
+
+                .header-row{
+                    font-weight:bold;
+                }
+
+                .header-row, .guest-row, select, input, button{
+                    text-transform:uppercase;
+                }
+            
+                .guest-row{
+                    position:relative;
+                }
+
+                .footer-row{
+                    margin-top:12px;
+                }
+
+                &.responded .footer-row{
+                    display:none;
+                }
+
+                .send-button{
+                    padding:4px 18px;
+                
+                }
+
+                .header-row, .guest-row{
+                    margin-top:5px;
+                    margin-bottom:5px;
+                }
+
+                .attending-col{
+                    text-align:right;
+                }
+
+                .guest-input{
+                   width:100%;
+                }
+
+               
+            }
+        }
+    }
+
+
+    .required {
+        color:@flourish-color
+    }
+
     label{
         font-family: @font-nav;
+
         text-transform:uppercase;
-        .required {
-            color:@flourish-color
-        }
+        
     }
 
     .form-field-help-text{
         font-style:italic;
     }
 
-    label.btn{
-         text-transform:none;
-    }
 
-    label.attending-yes{
-        width:49%;
-        float:left;
-    }
-
-    label.attending-no{
-        width:49%;
-        float:right;
-    }
-
-    .btn{
-        border-color:@flourish-color;
-        border-width:2px;
-        font-size:1.3em;
-        font-family:@font-nav;
-    }
-
-    .btn:hover, .btn:focus, .btn:active, .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.focus{
-        border-color:@flourish-color;
-        background-color:transparent;
-    }
-
-    .btn.active{
-        background-color:@flourish-color;
-        border-color:@flourish-color;
-        background-image:none;
-        border-width:2px;
-        color:white;
-        box-shadow:none;
-    }
-
-    .btn-primary{
-        background-color:@flourish-color;
-    }
-
-    .btn-primary[disabled]{
-        background-color:lightgray;
-        border-color:lightgray;
-    }
-
-    .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary.focus{
-        border-color:@flourish-color;
-        background-color:@flourish-color;
-    }
-
-    .btn:disabled, .btn{
-        transition: color 200ms ease,background-color 200ms ease,border-color 200ms ease;
-    }
-
-    #sendButton{
-        width:100%;
-         @media (min-width: @screen-sm)   {
-            width:49%;
-         }
-
-         &[data-loading]{
-             background-color:@flourish-color;
-             border-color:@flourish-color;
-         }
-    }
-
-    .attending-no-container, .attending-yes-container {
-        text-align: center;
-        font-size: 1.5em;
-        max-width: @screen-sm;
-        margin: auto;
-        line-height: 1.2;
-    }
 }
 
 section.people{
@@ -794,9 +917,9 @@ section.plan{
 
 
 section.feed{
-    p{
-        font-size:1.8em;
-        line-height:1.5em;
+    .feed-intro {
+        font-size:@intro-font-size;
+        line-height:@intro-line-height;
         padding-bottom:20px;
     }
 

@@ -8,10 +8,11 @@
             <title>@Model.Data.title</title>
 
             <!--[if lt IE 9]>
-            <link rel="stylesheet" href="/lib/bootstrap/3.3.4/css/bootstrap.min.css">
-            <link rel="stylesheet" href="/css/site.less">
+            <link rel="stylesheet" href="/Content/lib/bootstrap/3.3.4/css/bootstrap.min.css">
+            <link rel="stylesheet" href="/Content/less/site.less">
             <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-            <script src="/lib/respond/1.4.2/respond.min.js"></script>
+            <script src="/Content/js/polyfill.js"></script>
+            <script src="/Content/lib/respond/1.4.2/respond.min.js"></script>
             <![endif]-->
             <!--[if gte IE 9]>-->
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -24,11 +25,16 @@
 
 		</head>
 		<body>
-        <section class="hero-container">
-            <div class="hero-image">
-                <h1><div class="intro">@Model.Data.intro</div><div class="date">@Model.Data.date</div></h1>
-            </div>
-        </section>
+            @{ 
+                Html.BeginScriptContext();
+                Html.AddScriptFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js");
+                Html.AddScriptFile("//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js");
+            }
+            <section class="hero-container">
+                <div class="hero-image">
+                    <h1><div class="intro">@Model.Data.intro</div><div class="date">@Model.Data.date</div></h1>
+                </div>
+            </section>
             <div class="not-hero">
 
                 <nav>
@@ -69,14 +75,10 @@
                 }
 
 
+                @{ 
+                    Html.AddScriptFile("~/Content/js/site.js");
+                    Html.EndScriptContext();
 
-
-                @using (var context = Html.BeginScriptContext())
-                {
-                    context.AddScriptFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js");
-                    context.AddScriptFile("//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js");
-                    context.AddScriptFile("/Content/js/site.js");
-                    
                 }
                 @Html.RenderScripts();
 

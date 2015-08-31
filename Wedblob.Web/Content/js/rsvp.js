@@ -1,4 +1,80 @@
-﻿(function ($) {
+﻿jQuery(function ($) {
+
+    $.fn.animateHeight = function (heightChangeFn, animationTime) {
+
+        this.each(function () {
+            var $this = $(this);
+            $this.data('startHeight', $this.height());
+        });
+
+
+        var elementsToShow = []
+        var elementsToHide = []
+        var showFn = function (element) {
+            $element = element instanceof $ ? element : $(element);
+            $element.each(function () {
+                elementsToShow.push(this);
+
+                //if we are showing an item we previous hid we will remove the item from being hidden
+                var hideIndex = elementsToHide.indexOf(this);
+                if (hideIndex >= 0) {
+                    elementsToHide.splice(hideIndex, 1);
+                }
+            });
+        }
+        var hideFn = function (element) {
+            $element = element instanceof $ ? element : $(element);
+            $element.each(function () {
+                elementsToHide.push(this);
+
+                //if we are hiding an item we previous shown we will remove the item from being shown
+                var showIndex = elementsToShow.indexOf(this);
+                if (showIndex >= 0) {
+                    elementsToShow.splice(showIndex, 1);
+                }
+            });
+        }
+
+        heightChangeFn(showFn, hideFn);
+
+        var $elementsToHide = $(elementsToHide).filter(':visible');
+        var $elementsToShow = $(elementsToShow).not(':visible');
+
+        //set the elements to the final state so we can calculate the height
+        $elementsToHide.hide();
+        $elementsToShow.show();
+
+        this.each(function () {
+            var $this = $(this);
+            var startHeight = $this.data('startHeight') || 0;
+
+            $this.css({ height: 'auto' });
+            var newHeight = $this.height();
+
+            $this.css({ height: startHeight });
+            $this.animate({ height: newHeight }, animationTime, function () {
+                $this.css({ height: 'auto' })
+            });
+        });
+
+        //set them back to their original states
+        $elementsToShow.hide();
+        $elementsToHide.show();
+
+        //animate our elements to hide opacity from 1->0
+        $elementsToHide.css({ opacity: 1 }).animate({ opacity: 0 }, animationTime / 2, function () {
+            $elementsToHide.hide().css({ opacity: 1 });
+
+            //animate elements to show opacity from 0->1
+            $elementsToShow.show().css({ opacity: 0 }).animate({ opacity: 1 }, animationTime / 2);
+        })
+
+        if ($elementsToHide.length == 0) {
+            $elementsToShow.show().css({ opacity: 0 }).animate({ opacity: 1 }, animationTime / 2);
+        }
+
+
+    };
 
     var stringFormat = function (format) {
         if (!format)
@@ -35,127 +111,144 @@
         return deferred.promise();
     }
 
-    var firstName = function (name) {
-        return name.split(' ')[0];
+    var animateHeight = function () {
+
     }
 
-    var getParameterByName = function (name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-
-    var setRSVPMessage = function (rsvp) {
-        rsvp = rsvp || {};
-        rsvp.guests = rsvp.guests || [];
-
-
-        //we will start the poor-mans databinding, not worth using anything fancy as this is
-        //the only thing in the site we need to databind
-        $('.attending-unknown-container').toggle(rsvp.attending === undefined || rsvp.attending === null);
-        $('.attending-yes-container').toggle(rsvp.attending === true);
-        $('.attending-no-container').toggle(rsvp.attending === false);
-
-        var primaryGuestName = rsvp.guests.length >= 1 ? rsvp.guests[0] : '';
-        var otherGuests = rsvp.guests.length >= 2 ? rsvp.guests.slice(1) : [];
-        var otherGuestsFriendlyString = ''
-        if (otherGuests.length === 0) {
-            otherGuestsFriendlyString = ''
-        }
-        else if (otherGuests.length === 1) {
-            otherGuestsFriendlyString = ' and ' + firstName(otherGuests[0]);
-        }
-        else if (otherGuests.length >= 2) {
-            var allButLastGuest = otherGuests.slice(0, Math.max(0, otherGuests.length - 1));
-            for (var i = 0; i < allButLastGuest.length; i++) {
-                allButLastGuest[i] = firstName(allButLastGuest[i]);
-            }
-            otherGuestsFriendlyString = ', ' + allButLastGuest.join(', ');
-            otherGuestsFriendlyString += ' and ' + firstName(otherGuests[otherGuests.length - 1]);
-        }
-
-        $('#nameInput').val(primaryGuestName);
-        $('#guestInput').val(otherGuests.join(', '));
-
-        var yesText = $('.attending-yes-container p').attr('data-text');
-        yesText = stringFormat(yesText, firstName(primaryGuestName), otherGuestsFriendlyString);
-        $('.attending-yes-container p').html(yesText);
-
-        var noText = $('.attending-no-container p').attr('data-text');
-        noText = stringFormat(noText, firstName(primaryGuestName), otherGuestsFriendlyString);
-        $('.attending-no-container p').html(noText);
-    }
-
-
-
-    $('#rsvpForm').submit(function (e) {
+    $('.search-form').submit(function (e) {
         e.preventDefault();
-        var guests = [$('#nameInput').val()];
-        guests.push.apply(guests, $('#guestInput').val().split(','));
-
-        var guestsClean = []
-        for (var i = 0; i < guests.length; i++) {
-            var trimmed = guests[i].trim();
-            if (trimmed)
-                guestsClean.push(trimmed);
-        }
-
-        var rsvp = {
-            attending: !!$("input:radio[name='attending']:checked").val(),
-            guests: guestsClean
-        }
-
-        var tag = $('#tagInput').val();
-        var isUpdate = tag ? true :false;
+        var self = this;
+        var searchQuery = $('.search-input', this).val();
 
         var submitButton = $('button[type=submit]', this);
         var l = submitButton.ladda();
         l.ladda('start');
-        
+
         var delayedCall = minDelayResponse($.ajax({
-            type: isUpdate ? 'PUT' : 'POST',
-            url: '/api/rsvp/' + (isUpdate ? '' : tag),
-            data: JSON.stringify(rsvp),
-            contentType: "application/json",
+            type: 'GET',
+            url: '/api/rsvp/?q=' + encodeURIComponent(searchQuery),
             dataType: 'json'
-        }), 1000)
+        }), 1000);
 
         delayedCall.done(function (data) {
-            setRSVPMessage(data);
+            var $searchResultContainer = $('.search-results').animateHeight(function (show, hide) {
+                hide($('.search-results .header'));
+                var headerClass = data.length > 0 ? '.matching' : '.no-matching';
+                var $header = $('.search-results .header' + headerClass);
+                var text = stringFormat($header.attr('data-text'), searchQuery);
+                $header.html(text);
+                show($header);
+
+                $('.search-result-items').empty()
+                    .jqoteapp('#resultItemTemplate', data)
+                    .find('.guest-input')
+                    .trigger('keyup');
+            },250);
         }).fail(function (data) {
-             alert('Something has gone wrong :(')
+            alert('Something has gone wrong :(')
         }).always(function () {
             l.ladda('stop');
         });;
     });
 
-    
+    $('.search-form .search-input').on('keyup', function () {
+        var $this = $(this);
+        isValid = $(this).val().length >= 2;
 
-    var setSendEnabledness = function () {
-        $('#sendButton').prop('disabled', $('#nameInput').val().length == 0 || !$("input:radio[name='attending']").is(":checked"));
-    }
+        $this.closest('form').find('button[type="submit"], input[type="submit"]').prop('disabled', !isValid);
+    }).trigger('keyup');
 
-    $("#nameInput").on('keyup', setSendEnabledness);
-    $("input:radio[name='attending']").on('change', setSendEnabledness);
+    //clicking on the rsvp button
+    $('.search-results').on('click', '.detail-button', function () {
+        var $this = $(this);
+        $this.closest('ul').children('li').removeClass('detail');
+        $this.closest('li').addClass('detail');
+    })
 
+    //enable our attending field only if the guest has a name
+    $('.search-results').on('keyup', '.guest-input', function () {
+        var $this = $(this);
+        isValid = $(this).val().length > 0;
 
-    //Run on startup
-    (function () {
-        var tag = getParameterByName("tag");
-
-        if (tag) {
-            $('#tagInput').val(tag);
-            $.getJSON('/api/rsvp/' + tag, function (data, textStatus) {
-                debugger;
-                setRSVPMessage(data);
-            }).error(function () {
-                setRSVPMessage();
-            });
+        var $select = $this.closest('.row').find('select');
+        var wasDisabled = $select.prop('disabled');
+        var willBeDisabled = !isValid;
+        if (wasDisabled != willBeDisabled) {
+            $select.val(isValid ? 'true' : 'false');
         }
-        else {
-            setRSVPMessage()
-        }
-    })()
+        $select.prop('disabled', willBeDisabled);
+    });
 
-})(jQuery);
+
+    //sending hte rsvps
+    $('.search-results').on('click', '.send-button', function () {
+        var $this = $(this);
+        var $listItem = $this.closest('li');
+
+        var l = $this.ladda();
+        l.ladda('start');
+
+        var disabledInput = $this.closest('li').find('.guest-row').find('input[type="text"]:enabled, select:enabled').prop('disabled', true);
+
+        rsvps = []
+        $listItem.find('.guest-row').each(function () {
+            var $row = $(this);
+            var $idHidden = $row.find('input[name="id"]');
+            var $guestInput = $row.find('input[name="name"]');
+            var $attendingInput = $row.find('select[name="attending"]');
+
+            //only save rows that actually ahve an attending dropdown
+            if ($attendingInput.length > 0) {
+                var guestName = $row.find('input[name="name"]').val();
+
+                //we are not attending if there is not guest specified, otherwise
+                //we take the value of the drop down
+                var attending = $guestInput.length === 1 && !guestName
+                    ? false
+                    : $attendingInput.val() == 'true';
+
+                var rsvp = {
+                    id : $idHidden.val(),
+                    attending : attending
+                };
+                if ($guestInput.length === 1)
+                    rsvp.name = guestName;
+                rsvps.push(rsvp);
+            }
+        });
+
+        console.log(rsvps);
+       
+        var delayedCall = minDelayResponse($.ajax({
+            type: 'POST',
+            url: '/api/rsvp',
+            dataType: 'json',
+            data: {
+                guests: rsvps
+            }
+        }), 1000).done(function (data) {
+            var updatedRowsHtml = $('#resultItemTemplate').jqote(data);
+            var $updatedRows = $(updatedRowsHtml);
+            $updatedRows.find('.footer-row').show().find(':input').prop('disabled',true);
+
+            $updatedRows.addClass('detail')
+                .find('.guest-input')
+                .trigger('keyup');
+
+            $listItem.replaceWith($updatedRows);
+
+            $updatedRows.animateHeight(function (show, hide) {
+                hide($updatedRows.find('.footer-row'));
+            },100)
+
+        }).fail(function (data) {
+            alert('Something has gone wrong :(')
+            disabledInput.prop('disabled', false);
+        }).always(function () {
+            
+        });
+     
+
+    });
+
+});

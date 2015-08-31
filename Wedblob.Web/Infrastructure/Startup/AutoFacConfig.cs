@@ -1,10 +1,7 @@
 ﻿using Autofac;
 using Autofac.Core;
 using Autofac.Integration.Mvc;
-using HashidsNet;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-using Raven.Client;
-using Raven.Client.Embedded;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +28,7 @@ namespace Wedblob.Web.Infrastructure.Startup
 
             builder.RegisterType<Settings>().As<ISettings>().SingleInstance();
             builder.RegisterType<ContentService>().As<IContentService>();
-            builder.Register(c => new Hashids(c.Resolve<ISettings>().HashIdSalt, minHashLength: c.Resolve<ISettings>().HashIdMinLength, alphabet:c.Resolve<ISettings>().HashIdAlphabet)).As<Hashids>().SingleInstance();
-
-            builder.Register(c => new EmbeddableDocumentStore() { DataDirectory = "App_Data" }.Initialize()).As<IDocumentStore>().SingleInstance();
+            builder.Register(c => new Database("db"));
              
             builder.RegisterAssemblyTypes(thisAssembly)
                 .Where(t => t.IsAssignableTo<IStartupTask>())

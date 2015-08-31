@@ -23,8 +23,8 @@ namespace Wedblob.Web.Infrastructure.Startup
 
             Routes.MapRoute(
                 name: "Default",
-                url: "{tag}",
-                defaults: new { controller = "Default", action = "Index", tag = UrlParameter.Optional }
+                url: "",
+                defaults: new { controller = "Default", action = "Index" }
             );
 
 

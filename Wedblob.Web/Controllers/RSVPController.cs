@@ -1,152 +1,148 @@
-﻿using HashidsNet;
-using Raven.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Wedblob.Web.Models;
 using Wedblob.Web.Services;
+using Dapper;
 
 namespace Wedblob.Web.Controllers
 {
-    public class RSVPOutputModel
+    public class GuestModel
     {
-        public string tag { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
         public bool? attending { get; set; }
-        public string[] guests { get; set; }
+    }
+
+    public class RSVPSearchOutputModel
+    {
+        public string groupName { get; set; }
+        public GuestModel[] guests { get; set; }
     }
 
     public class RSVPInputModel
     {
-        public string tag { get; set; }
-        public bool? attending { get; set; }
-        public string[] guests { get; set; }
+        public GuestModel[] guests { get; set; }
     }
+
+    public class RSVPOutputModel
+    {
+        public GuestModel[] guests { get; set; }
+    }
+
+
 
     public class RSVPController : BaseController
     {
-        private readonly Hashids _hashId;
-        private readonly IDocumentStore _documentStore;
+        private readonly Database _db;
 
-        public RSVPController(Hashids hashId, IDocumentStore documentStore)
+        public RSVPController(Database db)
         {
-            this._hashId = hashId;
-            this._documentStore = documentStore;
+            this._db = db;
         }
 
+
         [HttpGet]
-        public async Task<ActionResult> Index([Bind(Prefix = "$skip")] int? skip = null, [Bind(Prefix = "$top")]int? top = null)
+        public async Task<ActionResult> Index([Bind(Prefix = "$top")]int? top = null, string q = null)
         {
-            using (var session = _documentStore.OpenAsyncSession())
+            //we dont want to worry about punctuation or numbers. Also protects against
+            //some inputting in SQL wildcard characters (like '%')
+            q = Regex.Replace(q, @"[^\p{L} ]", "");
+
+            var result = await _db.Execute(async conn =>
             {
-                IQueryable<RSVP> rsvps = session.Query<RSVP>();
-                if (skip != null)
-                    rsvps = rsvps.Skip(skip.Value);
-                if (top != null)
-                    rsvps = rsvps.Take(top.Value);
+                var queryBase = @"SELECT * FROM Rsvp WHERE GroupName IN (SELECT GroupName FROM Rsvp WHERE {0});";
 
- 
-                return Json(await rsvps.Select(rsvp => (new RSVPOutputModel()
+                var queryParams = new DynamicParameters();
+                queryParams.Add("query", q);
+
+                //our partial match has to have matching word for every query word
+                int i = 0;
+                var partialMatchWhereElements = new List<string>();
+                foreach(var partialQ in q.Split(' '))
                 {
-                    attending = rsvp.Attending,
-                    guests = rsvp.Guests,
-                    tag = rsvp.Tag
-                })).ToListAsync());
-            }
+                    var paramName = "partialQuery" + i++;
+                    queryParams.Add(paramName, "% " + partialQ.Trim() + "%");
+                    partialMatchWhereElements.Add("CONCAT(' ',Name,' ',ISNULL(AlternateNames,'')) LIKE @" + paramName);
+                }
 
+                //we will do one sql query for both an exact match and a partial match
+                var multiSql = string.Join(Environment.NewLine,
+                    string.Format(queryBase, @"Name LIKE @query"),
+                    string.Format(queryBase, string.Join(" AND ", partialMatchWhereElements)));
+                using (var multi = await conn.QueryMultipleAsync(multiSql, queryParams))
+                {
+                    //if we have an exact match use that, otherwise we resort ot accepting parital matches
+                    var exactMatch = await multi.ReadAsync<Rsvp>();
+                    if (exactMatch.Any())
+                        return exactMatch;
+                    return await multi.ReadAsync<Rsvp>();
+                }
+            });
             
-        }
 
-        [HttpGet]
-        public async Task<ActionResult> Get(string tag)
-        {
-            if(string.IsNullOrWhiteSpace(tag))
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            using (var session = _documentStore.OpenAsyncSession())
+            var output = result.GroupBy(x => x.GroupName).Select(x => new RSVPSearchOutputModel()
             {
-                RSVP rsvp = await session.Query<RSVP>().FirstOrDefaultAsync(x => x.Tag == tag);
-                if (rsvp == null)
-                    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-                
-
-                return Json(new RSVPOutputModel()
+                groupName = x.Key,
+                guests = x.Select(g => new GuestModel()
                 {
-                    attending = rsvp.Attending,
-                    guests = rsvp.Guests,
-                    tag = rsvp.Tag
-                });
-            }
+                    id = g.RsvpID,
+                    name = g.Name,
+                    attending = g.Attending
+
+                }).ToArray()
+            });
+            if (top.HasValue)
+                output = output.Take(top.Value);
+            return Json(output.ToList());
         }
 
+       
         [HttpPost]
         public async Task<ActionResult> Post(RSVPInputModel data)
         {
-            using (var session = _documentStore.OpenAsyncSession())
+            var result = await _db.Execute(async conn =>
             {
-                var rsvp = new RSVP();
-                await session.StoreAsync(rsvp);
-
-                rsvp.Tag = data.tag ?? GenerateTagFromId(rsvp.Id);
-                rsvp.Guests = data.guests;
-                rsvp.Attending = data.attending;
-                rsvp.Updated = DateTime.UtcNow;
-
-
-                await session.SaveChangesAsync();
-
-                return Json(new RSVPOutputModel()
+     
+                await conn.ExecuteAsync("UPDATE Rsvp SET Attending=@attending, Name=ISNULL(@name,Name), UpdatedDate=getdate() WHERE RsvpID=@id", data.guests.Select(x => new
                 {
-                    attending = rsvp.Attending,
-                    guests = rsvp.Guests,
-                    tag = rsvp.Tag
+                    id = x.id,
+                    attending = x.attending,
+                    name = x.name
+                }).ToArray());
+
+                return await conn.QueryAsync<Rsvp>("SELECT * FROM Rsvp WHERE GroupName IN (SELECT GroupName FROM Rsvp WHERE RsvpID IN @ids)", new
+                {
+                    ids = data.guests.Select(x => x.id).ToArray()
                 });
-            }
-        }
+            });
 
-        [HttpPut]
-        public async Task<ActionResult> Put(string tag, RSVPInputModel data)
-        {
-            if (string.IsNullOrWhiteSpace(tag))
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                
 
-            using (var session = _documentStore.OpenAsyncSession())
+            var output = result.GroupBy(x => x.GroupName).Select(x => new RSVPSearchOutputModel()
             {
-
-                RSVP rsvp = await session.Query<RSVP>().FirstOrDefaultAsync(x => x.Tag == tag);
-                if(rsvp == null)
-                        return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-
-                rsvp.Guests = rsvp.Guests ?? data.guests;
-                rsvp.Attending = rsvp.Attending ?? data.attending;
-                rsvp.Tag = rsvp.Tag ?? data.tag;
-                rsvp.Updated = DateTime.UtcNow;
-
-                await session.SaveChangesAsync();
-
-                return Json(new RSVPOutputModel()
+                groupName = x.Key,
+                guests = x.Select(g => new GuestModel()
                 {
-                    attending = rsvp.Attending,
-                    guests = rsvp.Guests,
-                    tag = rsvp.Tag
-                });
-            }
-        }
+                    id = g.RsvpID,
+                    name = g.Name,
+                    attending = g.Attending
 
-        private string GenerateTagFromId(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-                return null;
+                }).ToArray()
+            });
+            return Json(output);
 
-            var intPartString = id.Substring(id.IndexOf('/')+1);
-            int intPart;
-            if (!int.TryParse(intPartString, out intPart))
-                return null;
-            return _hashId.Encode(intPart);
-        }
+       }
+       
     }
+
+    
 }

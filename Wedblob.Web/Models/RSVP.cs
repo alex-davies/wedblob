@@ -7,13 +7,16 @@ namespace Wedblob.Web.Models
 {
     public class RSVP
     {
+        public class Guest
+        {
+            public string Name { get; set; }
+
+            public bool? Attending { get; set; }
+        }
+
         public string Id { get; set; }
 
-        public string Tag { get; set; }
-
-        public bool? Attending { get; set; }
-
-        public string[] Guests { get; set; }
+        public Guest[] Guests { get; set; }
 
         public DateTime Created { get; set; }
 
@@ -24,5 +27,20 @@ namespace Wedblob.Web.Models
             Created = DateTime.UtcNow;
             Updated = DateTime.UtcNow;
         }
+    }
+
+    public class Rsvp
+    {
+        public int RsvpID { get; set; }
+
+        public string GroupName {get; set;}
+
+        public string Name { get; set;}
+
+        public bool? Attending { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
     }
 }

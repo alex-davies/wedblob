@@ -1,5 +1,4 @@
-﻿using HashidsNet;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -15,13 +14,11 @@ namespace Wedblob.Web.Controllers
     public class DefaultController : BaseController
     {
         public readonly IContentService _contentService;
-        public readonly Hashids _hashids;
         public readonly ISettings _settings;
 
-        public DefaultController(ISettings settings, IContentService contentService, Hashids hashids)
+        public DefaultController(ISettings settings, IContentService contentService)
         {
             _contentService = contentService;
-            _hashids = hashids;
             _settings = settings;
         }
 

@@ -1,0 +1,28 @@
+{
+  "IndexId": 9,
+  "Name": "Auto/RSVPs",
+  "LockMode": "Unlock",
+  "Map": "from doc in docs.RSVPs\nselect new {\r\n\n}",
+  "Maps": [
+    "from doc in docs.RSVPs\nselect new {\r\n\n}"
+  ],
+  "Reduce": null,
+  "IsMapReduce": false,
+  "IsCompiled": false,
+  "Stores": {},
+  "Indexes": {},
+  "SortOptions": {},
+  "Analyzers": {},
+  "Fields": [
+    "__document_id"
+  ],
+  "Suggestions": {},
+  "TermVectors": {},
+  "SpatialIndexes": {},
+  "InternalFieldsMapping": {},
+  "MaxIndexOutputsPerDocument": null,
+  "Type": "Auto",
+  "DisableInMemoryIndexing": false,
+  "IsTestIndex": false,
+  "IsSideBySideIndex": false
+}
