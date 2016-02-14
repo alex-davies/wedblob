@@ -370,6 +370,7 @@
     <Content Include="Views\Shared\when-and-where.cshtml" />
     <Content Include="Views\Shared\people.cshtml" />
     <Content Include="Views\Shared\site.cshtml" />
+    <Content Include="Views\Shared\two-col-html.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

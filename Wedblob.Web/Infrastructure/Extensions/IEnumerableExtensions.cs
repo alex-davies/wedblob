@@ -35,6 +35,19 @@ namespace Wedblob.Web.Infrastructure.Extensions
                 yield  return current.ToString();
             }
         }
+
+        public static IEnumerable<string> OfToStrings(this object source)
+        {
+            var enumerableSource = source as IEnumerable;
+            if (enumerableSource != null)
+            {
+                return IEnumerableExtensions.OfToStrings(enumerableSource);
+            }
+
+            return Enumerable.Repeat(source.ToString(), 1);
+        }
+
+
     }
 
     

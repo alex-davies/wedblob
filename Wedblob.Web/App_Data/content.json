@@ -75,6 +75,19 @@
             ]
         },
         {
+            "type": "two-col-html",
+            "navigationTitle": "Guest Information",
+            "navigationId": "guestinfo",
+            "html": [
+                
+                "<h3 class=\"section-header\">Transport &amp; Parking</h3><p>Parking is available at the venue.</p><p>If you wish to take a taxi, please contact one of the following firms to pre-book your taxi:<ul><li>Auckland Co-op Taxi: (09) 300 3000</li><li>Corporate Cabs: (09) 377 0773</li><li>Green Cabs: 0800 464 7336</li></ul></p><h3 class=\"section-header\">Nearby Accommodation</h3><p>If you are travelling from outside of Auckland and require accommodation please contact us so we can organise it for you. Contact us at <a href=\"mailto:alexandniluwed@gmail.com\">alexandniluwed@gmail.com</a></p><p>If you wish to organise your own accommodation, we recommend:<p>Lincoln Green<br/>159 Lincoln Road<br/>Henderson<br/>Waitakere 0610<br/>New Zealand</p><strong>Phone:</strong> 09 838 7006<br/><a href=\"http://www.lincolngreen.co.nz\">www.lincolngreen.co.nz</a></p>",
+                "<h3 class=\"section-header\">Dress code</h3><p>The dress code for the wedding is Cocktail. What this means</br><strong>For ladies:</strong> your loveliest party dress or saree.</br><strong>For gents:</strong> either a suit or dress pants and shirt.</p><h3 class=\"section-header\">Gifts</h3><p>Please do not feel obliged to buy a gift; your presence at the wedding is the most important present. However, if you would like to give a gift, we would greatly appreciate a small contribution to our honeymoon.</p><h3 class=\"section-header\">Any other queries</h3><p>If you have any other questions, you can contact us at <a href=\"mailto:alexandniluwed@gmail.com\">alexandniluwed@gmail.com</a><p>"
+
+                
+
+            ]
+        },
+        {
             "type": "plan",
             "navigationTitle": "On The day",
             "navigationId": "plan",

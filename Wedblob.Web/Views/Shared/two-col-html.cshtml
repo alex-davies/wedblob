@@ -1,0 +1,24 @@
+@model Wedblob.Web.Models.ContentFragment
+<section id="@Model.Data.navigationId" class="two-col-html">
+    <h2 class="section-header">@Model.Data.navigationTitle</h2>
+
+    <div class="container two-column">
+        @{var rawHtmls = IEnumerableExtensions.OfToStrings(Model.Data.html);}
+       
+        @foreach (var group in IEnumerableExtensions.GroupsOf(rawHtmls, 2))
+        {
+            <div class="row">
+                @{int col = 0;}
+                @foreach (var rawHtml in group)
+                {
+                    <div class="col-sm-6">
+                        <div class="@(col++ % 2 == 0 ? "left-column" : "right-column")">
+                            @Html.Raw(rawHtml)
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <div class="line-divider"></div>
+    </div>
+</section>
